@@ -1,7 +1,42 @@
 @import "tailwindcss";
+@source inline("font-sauce-regular font-sauce-bold font-dm-regular font-dm-bold");
+
+@font-face {
+  font-family: "Open Sauce One";
+  src: url("/fonts/OpenSauceOne-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Open Sauce One";
+  src: url("/fonts/OpenSauceOne-Bold.ttf") format("truetype");
+  font-weight: 500 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "DM Sans";
+  src: url("/fonts/DMSans-Regular.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "DM Sans";
+  src: url("/fonts/DMSans-Bold.woff") format("woff");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
 
 @theme {
-  --font-sans: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-sauce: "Open Sauce One", system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-dm: "DM Sans", system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-sans: "Open Sauce One", system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   --color-bg: #fafafa;
   --color-fg: #171717;
   --color-muted: #525252;
@@ -11,13 +46,36 @@
   --color-accent-fg: #ffffff;
 }
 
+@utility font-sauce-regular {
+  font-family: var(--font-sauce);
+  font-weight: 400;
+}
+
+@utility font-sauce-bold {
+  font-family: var(--font-sauce);
+  font-weight: 700;
+}
+
+@utility font-dm-regular {
+  font-family: var(--font-dm);
+  font-weight: 400;
+}
+
+@utility font-dm-bold {
+  font-family: var(--font-dm);
+  font-weight: 700;
+}
+
 html {
   scroll-behavior: smooth;
+  font-family: var(--font-sauce);
+  font-weight: 400;
 }
 
 body {
   margin: 0;
-  font-family: var(--font-sans);
+  font-family: inherit;
+  font-weight: inherit;
   background: var(--color-bg);
   color: var(--color-fg);
   -webkit-font-smoothing: antialiased;
@@ -45,4 +103,60 @@ body {
 
 .prose-site li + li {
   margin-top: 0.35em;
+}
+
+.intro-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: grid;
+  place-items: center;
+  background-color: #ffffff;
+  animation:
+    intro-bg 0.6s ease 1s forwards,
+    intro-overlay-out 0.5s ease 2.6s forwards;
+}
+
+.intro-seq {
+  grid-area: 1 / 1;
+  width: min(80vw, 720px);
+  max-height: 80vh;
+  height: auto;
+  object-fit: contain;
+}
+
+.intro-seq-1 {
+  z-index: 2;
+  animation: intro-seq1-out 0.6s ease 1s forwards;
+}
+
+.intro-seq-2 {
+  z-index: 1;
+  opacity: 0;
+  mix-blend-mode: screen;
+  animation: intro-seq2-in 0.6s ease 1s forwards;
+}
+
+@keyframes intro-bg {
+  to {
+    background-color: #20263e;
+  }
+}
+
+@keyframes intro-seq1-out {
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes intro-seq2-in {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes intro-overlay-out {
+  to {
+    opacity: 0;
+  }
 }

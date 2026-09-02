@@ -4,6 +4,7 @@ import { ContentSection } from './components/ContentSection'
 import { Footer } from './components/Footer'
 import { Header } from './components/Header'
 import { Hero } from './components/Hero'
+import { IntroOverlay } from './components/IntroOverlay'
 import { parseSiteContent } from './lib/parseContent'
 
 const site = parseSiteContent(siteMarkdown)
@@ -14,7 +15,8 @@ function App() {
   }, [])
 
   return (
-    <div id="top" className="min-h-svh bg-bg text-fg">
+    <div id="top" className="font-sauce-regular min-h-svh bg-bg text-fg">
+      <IntroOverlay />
       <Header siteTitle={site.siteTitle} nav={site.nav} />
       <main>
         <Hero

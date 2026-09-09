@@ -117,15 +117,38 @@ body {
     intro-overlay-out 0.5s ease 2.6s forwards;
 }
 
+.intro-logos,
+.intro-captions {
+  display: grid;
+  width: 100%;
+  justify-items: center;
+}
+
 .intro-seq {
   grid-area: 1 / 1;
-  width: min(80vw, 720px);
-  max-height: 80vh;
+  width: 100%;
+  max-height: 55vh;
   height: auto;
   object-fit: contain;
 }
 
-.intro-seq-1 {
+.intro-captions {
+  align-items: start;
+  margin-top: 1.25rem;
+  min-height: 2.75em;
+}
+
+.intro-caption {
+  grid-area: 1 / 1;
+  margin: 0;
+  text-align: center;
+  font-size: clamp(1.125rem, 2.4vw, 1.75rem);
+  line-height: 1.35;
+  letter-spacing: 0.01em;
+}
+
+.intro-seq-1,
+.intro-caption-1 {
   z-index: 2;
   animation: intro-seq1-out 0.6s ease 1s forwards;
 }
@@ -135,6 +158,26 @@ body {
   opacity: 0;
   mix-blend-mode: screen;
   animation: intro-seq2-in 0.6s ease 1s forwards;
+}
+
+.intro-caption-1 {
+  color: #171717;
+  font-size: clamp(2.25rem, 4.8vw, 3.5rem);
+  font-weight: 700;
+}
+
+.intro-caption-2 {
+  z-index: 1;
+  opacity: 0;
+  color: #ffffff;
+  font-weight: 700;
+  animation: intro-seq2-in 0.6s ease 1s forwards;
+}
+
+@media (min-width: 768px) {
+  .intro-caption-2 {
+    font-size: clamp(2.25rem, 4.8vw, 3.5rem);
+  }
 }
 
 @keyframes intro-bg {

@@ -63,16 +63,28 @@ export function IntroOverlay() {
         }
       }}
     >
-      <img
-        className="intro-seq intro-seq-2"
-        src="/images/intro-sequence-2.png"
-        alt=""
-      />
-      <img
-        className="intro-seq intro-seq-1"
-        src="/images/intro-sequence-1.png"
-        alt=""
-      />
+      <div className="intro-stage mx-auto flex w-full max-w-5xl flex-col items-center px-4 sm:px-6">
+        <div className="intro-logos">
+          <img
+            className="intro-seq intro-seq-2"
+            src="/images/intro-sequence-2.png"
+            alt=""
+          />
+          <img
+            className="intro-seq intro-seq-1"
+            src="/images/intro-sequence-1.png"
+            alt=""
+          />
+        </div>
+        <div className="intro-captions">
+          <p className="intro-caption intro-caption-2">
+            Academics for the Advancement
+            <br />
+            of Psychodynamic Psychology
+          </p>
+          <p className="intro-caption intro-caption-1">Welcome</p>
+        </div>
+      </div>
     </div>
   )
 }

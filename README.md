@@ -33,7 +33,17 @@ Layout, colors, fonts, and spacing are **not** in the markdown file. Those live 
 
 ## Images
 
-Put exported Canva assets in [`public/images/`](public/images/). Files there are served from `/images/...` (for example `public/images/hero.jpg` → `/images/hero.jpg`). Wiring them into the page means editing the React components.
+Put **resized WebP** files in [`public/images/`](public/images/). They are served from `/images/...` (for example `public/images/hero.webp` → `/images/hero.webp`).
+
+Export at about 2× the display size (the page column is 1024px wide). For logos, lossless WebP. Do not ship full-resolution Canva PNGs.
+
+Above-the-fold / intro images must also be:
+
+1. Preloaded in [`index.html`](index.html)
+2. Given `width` and `height`
+3. Decoded before any animation starts (`src/lib/media.ts`)
+
+Below-the-fold images use `loading="lazy"`. Wiring a new image into the page still means editing the React components.
 
 ## Deploy on Netlify
 

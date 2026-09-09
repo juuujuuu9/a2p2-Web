@@ -1,40 +1,9 @@
 import { useEffect, useState } from 'react'
-
-const STORAGE_KEY = 'a2p2-intro-seen'
-
-let playDecision: boolean | null = null
-
-function shouldPlayIntro(): boolean {
-  if (playDecision !== null) {
-    return playDecision
-  }
-
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    playDecision = false
-    return false
-  }
-
-  if (import.meta.env.DEV) {
-    playDecision = true
-    return true
-  }
-
-  try {
-    if (sessionStorage.getItem(STORAGE_KEY) === '1') {
-      playDecision = false
-      return false
-    }
-    sessionStorage.setItem(STORAGE_KEY, '1')
-  } catch {
-    // Ignore storage failures (private mode, blocked storage).
-  }
-
-  playDecision = true
-  return true
-}
+import { decodeImages, INTRO_SEQUENCE } from '../lib/media'
 
 export function IntroOverlay() {
-  const [visible, setVisible] = useState(() => shouldPlayIntro())
+  const [visible, setVisible] = useState(true)
+  const [ready, setReady] = useState(false)
 
   useEffect(() => {
     if (!visible) {
@@ -49,13 +18,32 @@ export function IntroOverlay() {
     }
   }, [visible])
 
+  useEffect(() => {
+    if (!visible) {
+      return
+    }
+
+    let cancelled = false
+    void decodeImages(INTRO_SEQUENCE.map((image) => image.src)).then(() => {
+      if (!cancelled) {
+        setReady(true)
+      }
+    })
+
+    return () => {
+      cancelled = true
+    }
+  }, [visible])
+
   if (!visible) {
     return null
   }
 
+  const [first, second] = INTRO_SEQUENCE
+
   return (
     <div
-      className="intro-overlay"
+      className={ready ? 'intro-overlay is-ready' : 'intro-overlay'}
       aria-hidden="true"
       onAnimationEnd={(event) => {
         if (event.animationName === 'intro-overlay-out') {
@@ -67,13 +55,20 @@ export function IntroOverlay() {
         <div className="intro-logos">
           <img
             className="intro-seq intro-seq-2"
-            src="/images/intro-sequence-2.png"
+            src={second.src}
+            width={second.width}
+            height={second.height}
             alt=""
+            decoding="async"
           />
           <img
             className="intro-seq intro-seq-1"
-            src="/images/intro-sequence-1.png"
+            src={first.src}
+            width={first.width}
+            height={first.height}
             alt=""
+            fetchPriority="high"
+            decoding="sync"
           />
         </div>
         <div className="intro-captions">

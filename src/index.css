@@ -95,6 +95,11 @@ body {
   text-underline-offset: 2px;
 }
 
+.prose-site img {
+  max-width: 100%;
+  height: auto;
+}
+
 .prose-site ul,
 .prose-site ol {
   margin: 0.75em 0;
@@ -112,6 +117,9 @@ body {
   display: grid;
   place-items: center;
   background-color: #ffffff;
+}
+
+.intro-overlay.is-ready {
   animation:
     intro-bg 0.6s ease 1s forwards,
     intro-overlay-out 0.5s ease 2.6s forwards;
@@ -150,6 +158,10 @@ body {
 .intro-seq-1,
 .intro-caption-1 {
   z-index: 2;
+}
+
+.intro-overlay.is-ready .intro-seq-1,
+.intro-overlay.is-ready .intro-caption-1 {
   animation: intro-seq1-out 0.6s ease 1s forwards;
 }
 
@@ -157,6 +169,10 @@ body {
   z-index: 1;
   opacity: 0;
   mix-blend-mode: screen;
+}
+
+.intro-overlay.is-ready .intro-seq-2,
+.intro-overlay.is-ready .intro-caption-2 {
   animation: intro-seq2-in 0.6s ease 1s forwards;
 }
 
@@ -171,7 +187,6 @@ body {
   opacity: 0;
   color: #ffffff;
   font-weight: 700;
-  animation: intro-seq2-in 0.6s ease 1s forwards;
 }
 
 @media (min-width: 768px) {

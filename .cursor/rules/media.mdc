@@ -1,0 +1,31 @@
+---
+description: First-load media — preload, decode, then animate. Keep images small.
+alwaysApply: true
+---
+
+# First-load media
+
+Never animate, fade, or swap an image until it has decoded. First visit has an empty cache.
+
+## Critical (intro, LCP, above the fold)
+
+1. Put the file in `public/images/` as **WebP**, ~2× the CSS display size (this site’s column is `max-w-5xl` ≈ 1024px → ~2048px wide max).
+2. Preload the exact URL in `index.html` (`as="image"`, `fetchpriority="high"` for the first frame).
+3. `await decodeImages([url])` (see `src/lib/media.ts`) before adding the class that starts CSS animation.
+4. Set `width` / `height` on `<img>` to the intrinsic pixels. First frame: `fetchPriority="high"` `decoding="sync"`.
+
+```tsx
+// ❌ BAD — animation clock starts while the PNG is still on the network
+<img className="intro-seq intro-seq-1" src="/images/logo.png" alt="" />
+
+// ✅ GOOD — same URL preloaded in index.html; animation class waits on decode
+<img src={first.src} width={first.width} height={first.height} fetchPriority="high" decoding="sync" alt="" />
+```
+
+## Everything else
+
+- `loading="lazy"` `decoding="async"` plus `width` / `height`.
+- Do not drop raw Canva PNGs into `public/`. Convert to WebP and resize first (`cwebp -lossless` for logos).
+- Markdown images inherit `.prose-site img { max-width: 100%; height: auto; }` — still set dimensions when you wire a real `<img>`.
+
+When you add a critical image, add its preload and extend `INTRO_SEQUENCE` (or the same `decodeImages` pattern). `npm run build` runs `check:media`.

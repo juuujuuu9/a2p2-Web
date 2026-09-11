@@ -27,7 +27,7 @@ function App() {
   }, [isContact, section])
 
   return (
-    <div className="font-sauce-regular min-h-svh bg-bg text-fg">
+    <div className="font-sauce-regular min-h-svh overflow-x-hidden bg-bg text-fg">
       {isHome ? <IntroOverlay /> : null}
       <Header
         siteTitle={site.siteTitle}
@@ -43,6 +43,10 @@ function App() {
             lede={site.hero.lede}
             ctaLabel={site.hero.ctaLabel}
             ctaHref={site.hero.ctaHref}
+            missionTitle={site.mission.title}
+            missionBody={site.mission.body}
+            principlesTitle={site.principles.title}
+            principles={site.principles.items}
           />
         ) : null}
         {section ? (

@@ -11,9 +11,10 @@ The Canva home frame is the spec. After the intro overlay, the page is **navy `#
 
 Stacked full-bleed bands, no cards, no hero overlay, no rounded photo:
 
-1. **Header** — solid navy. Row 1: `HEADER_LOGO` + two-line tagline on the left; social icons + outline **Donate** on the right. Hairline, then row 2: left-aligned text nav (About, Our Story, Podcast, Featured Programs, Get Involved, Events, FAQ). Use `Header` from `src/components/Header.tsx` on every page — do not rebuild the chrome.
+1. **Header** — solid navy. Row 1: `HEADER_LOGO` + two-line tagline on the left; social icons + outline **Donate** on the right. Hairline, then row 2: left-aligned text nav (Our Story, Podcast, Programs & Pathways, Events, Get Involved, FAQ, Partnerships). Use `Header` from `src/components/Header.tsx` on every page — do not rebuild the chrome.
 2. **Photo** — `HOME_PANEL` from `src/lib/media.ts`. Edge-to-edge, no padding, no radius.
-3. **Mission** — white body on navy, wide measure, comfortable leading. CTA is a **line + arrow + “Learn More”**, not a filled button. Home ends here. Nav items are separate routes (`/about`, `/our-story`, …), not in-page sections.
+3. **Lede** — white body on navy, wide measure, comfortable leading. CTA is a **line + arrow + “Learn More”**, not a filled button. It scrolls to `#mission`.
+4. **Our Mission + Our Principles** — same navy band, under the lede. Numbered principles (`01`–`06`) with `white/20` hairlines. Home ends here. Nav items are still separate routes (`/our-story`, `/podcast`, …).
 
 ## Chrome
 

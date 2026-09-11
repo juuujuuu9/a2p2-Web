@@ -101,10 +101,12 @@ export function Header({ siteTitle, tagline, nav, social, donate }: HeaderProps)
             {open ? 'Close' : 'Menu'}
           </button>
         </div>
-        <nav
-          id="site-nav"
-          className={`${open ? 'flex' : 'hidden'} flex-col gap-1 border-t border-fg/20 py-3 md:flex md:flex-row md:flex-wrap md:items-center md:gap-6 md:py-3.5`}
-        >
+      </div>
+      <hr className="border-0 border-t border-fg/20" />
+      <nav
+        id="site-nav"
+        className={`${open ? 'flex' : 'hidden'} mx-auto max-w-7xl flex-col gap-1 px-6 py-3 sm:px-8 md:flex md:flex-row md:flex-wrap md:items-center md:gap-6 md:py-3.5 lg:px-12`}
+      >
           {nav.map((item) => (
             <a
               key={item.href}
@@ -115,29 +117,28 @@ export function Header({ siteTitle, tagline, nav, social, donate }: HeaderProps)
               {item.label}
             </a>
           ))}
-          <div className="mt-2 flex items-center gap-4 py-2 md:hidden">
-            {social.map((item) => (
-              <a
-                key={`mobile-${item.label}`}
-                href={item.href}
-                className="text-fg"
-                aria-label={item.label}
-              >
-                <SocialGlyph label={item.label} />
-              </a>
-            ))}
-            {donate.label && donate.href ? (
-              <a
-                href={donate.href}
-                className="border border-fg px-3.5 py-1.5 text-fg"
-                onClick={() => setOpen(false)}
-              >
-                {donate.label}
-              </a>
-            ) : null}
-          </div>
-        </nav>
-      </div>
+        <div className="mt-2 flex items-center gap-4 py-2 md:hidden">
+          {social.map((item) => (
+            <a
+              key={`mobile-${item.label}`}
+              href={item.href}
+              className="text-fg"
+              aria-label={item.label}
+            >
+              <SocialGlyph label={item.label} />
+            </a>
+          ))}
+          {donate.label && donate.href ? (
+            <a
+              href={donate.href}
+              className="border border-fg px-3.5 py-1.5 text-fg"
+              onClick={() => setOpen(false)}
+            >
+              {donate.label}
+            </a>
+          ) : null}
+        </div>
+      </nav>
     </header>
   )
 }

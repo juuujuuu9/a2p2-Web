@@ -12,7 +12,7 @@ export const HEADER_LOGO = {
 export const HOME_PANEL = {
   src: '/images/panel.webp',
   width: 1024,
-  height: 286,
+  height: 375,
 } as const
 
 /** Wait until each URL has decoded (or `timeoutMs` elapses). */

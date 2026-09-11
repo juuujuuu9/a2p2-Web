@@ -26,6 +26,14 @@ export type SiteContent = {
     ctaHref: string
     image: string
   }
+  mission: {
+    title: string
+    body: string
+  }
+  principles: {
+    title: string
+    items: string[]
+  }
   sections: SiteSection[]
   contact: {
     title: string
@@ -65,6 +73,14 @@ function parseNav(value: unknown): NavItem[] {
   })
 }
 
+function parseStringList(value: unknown): string[] {
+  if (!Array.isArray(value)) return []
+  return value.flatMap((item) => {
+    const text = asString(item)
+    return text ? [text] : []
+  })
+}
+
 function parseSections(value: unknown): SiteSection[] {
   if (!Array.isArray(value)) return []
   return value.flatMap((item) => {
@@ -92,6 +108,14 @@ export function parseSiteContent(raw: string): SiteContent {
     frontmatter.footer && typeof frontmatter.footer === 'object'
       ? (frontmatter.footer as Record<string, unknown>)
       : {}
+  const mission =
+    frontmatter.mission && typeof frontmatter.mission === 'object'
+      ? (frontmatter.mission as Record<string, unknown>)
+      : {}
+  const principles =
+    frontmatter.principles && typeof frontmatter.principles === 'object'
+      ? (frontmatter.principles as Record<string, unknown>)
+      : {}
 
   return {
     siteTitle: asString(frontmatter.siteTitle, 'Site'),
@@ -103,8 +127,16 @@ export function parseSiteContent(raw: string): SiteContent {
       title: asString(hero.title, 'Welcome'),
       lede: asString(hero.lede),
       ctaLabel: asString(hero.ctaLabel, 'Learn More'),
-      ctaHref: asString(hero.ctaHref, '/about'),
+      ctaHref: asString(hero.ctaHref, '#mission'),
       image: asString(hero.image),
+    },
+    mission: {
+      title: asString(mission.title, 'Our Mission'),
+      body: asString(mission.body),
+    },
+    principles: {
+      title: asString(principles.title, 'Our Principles'),
+      items: parseStringList(principles.items),
     },
     sections: parseSections(frontmatter.sections),
     contact: {

@@ -4,9 +4,9 @@ type FooterProps = {
 
 export function Footer({ note }: FooterProps) {
   return (
-    <footer className="bg-surface">
-      <div className="mx-auto max-w-5xl px-4 py-8 sm:px-6">
-        {note ? <p className="text-sm text-muted">{note}</p> : null}
+    <footer className="border-t border-fg/20 bg-bg">
+      <div className="mx-auto max-w-7xl px-6 py-8 sm:px-8 lg:px-12">
+        {note ? <p className="font-sauce-regular text-sm text-muted">{note}</p> : null}
       </div>
     </footer>
   )

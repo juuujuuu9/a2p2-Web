@@ -1,31 +1,41 @@
 ---
-description: First-load media — preload, decode, then animate. Keep images small.
+description: First-load media and the WebP image pipeline. Always optimize before adding files.
 alwaysApply: true
 ---
 
-# First-load media
+# Images
 
-Never animate, fade, or swap an image until it has decoded. First visit has an empty cache.
+Never copy a PNG, JPEG, GIF, or Canva export into the repo. Every raster goes through `npm run optimize:images` first. Read `.cursor/skills/optimize-images/SKILL.md` when adding or replacing an image.
+
+```bash
+npm run optimize:images -- /path/to/source --name slug --kind logo|graphic|photo
+npm run check:media
+```
+
+- Output is **WebP only**, in `public/images/`. No originals beside it.
+- **logo** — UI marks. Lossless, max edge 512.
+- **graphic** — intro frames, type on transparent. Lossless, max edge 2560.
+- **photo** — camera/Canva photos. Lossy q80–90, max edge 2560 (2× of `max-w-7xl`).
+- Pass `--max-width` at **2× CSS display** (3× if the mark is under ~80px tall).
+- Keep SVG as SVG. Do not rasterize it.
 
 ## Critical (intro, LCP, above the fold)
 
-1. Put the file in `public/images/` as **WebP**, ~2× the CSS display size (this site’s column is `max-w-5xl` ≈ 1024px → ~2048px wide max).
-2. Preload the exact URL in `index.html` (`as="image"`, `fetchpriority="high"` for the first frame).
-3. `await decodeImages([url])` (see `src/lib/media.ts`) before adding the class that starts CSS animation.
-4. Set `width` / `height` on `<img>` to the intrinsic pixels. First frame: `fetchPriority="high"` `decoding="sync"`.
+1. Preload the exact URL in `index.html` (`as="image"`, `fetchpriority="high"` for the first frame).
+2. `await decodeImages([url])` before adding the class that starts CSS animation.
+3. Set `width` / `height` on `<img>` to the optimizer’s printed pixels. First frame: `fetchPriority="high"` `decoding="sync"`.
 
 ```tsx
-// ❌ BAD — animation clock starts while the PNG is still on the network
+// ❌ BAD — animation starts while a raw PNG is still on the network
 <img className="intro-seq intro-seq-1" src="/images/logo.png" alt="" />
 
-// ✅ GOOD — same URL preloaded in index.html; animation class waits on decode
+// ✅ GOOD — optimized WebP, preloaded, animation waits on decode
 <img src={first.src} width={first.width} height={first.height} fetchPriority="high" decoding="sync" alt="" />
 ```
 
 ## Everything else
 
 - `loading="lazy"` `decoding="async"` plus `width` / `height`.
-- Do not drop raw Canva PNGs into `public/`. Convert to WebP and resize first (`cwebp -lossless` for logos).
-- Markdown images inherit `.prose-site img { max-width: 100%; height: auto; }` — still set dimensions when you wire a real `<img>`.
+- Markdown images still get dimensions when wired as a real `<img>`.
 
-When you add a critical image, add its preload and extend `INTRO_SEQUENCE` (or the same `decodeImages` pattern). `npm run build` runs `check:media`.
+`npm run build` runs `check:media` (rejects raw rasters, oversized files, missing preloads).

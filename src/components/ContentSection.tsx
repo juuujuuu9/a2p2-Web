@@ -14,14 +14,14 @@ export function ContentSection({
   children,
 }: ContentSectionProps) {
   return (
-    <section id={id} className="scroll-mt-20 border-b border-border">
-      <div className="mx-auto max-w-5xl px-4 py-14 sm:px-6 sm:py-16">
-        <h2 className="mb-5 text-2xl font-semibold tracking-tight text-fg sm:text-3xl">
+    <section id={id} className="border-t border-fg/20">
+      <div className="mx-auto max-w-7xl px-6 py-14 sm:px-8 sm:py-16 lg:px-12">
+        <h1 className="font-sauce-regular mb-5 text-2xl tracking-tight text-fg sm:text-3xl">
           {title}
-        </h2>
+        </h1>
         {html ? (
           <div
-            className="prose-site text-base leading-relaxed text-muted"
+            className="prose-site font-dm-regular text-base leading-relaxed text-muted"
             dangerouslySetInnerHTML={{ __html: html }}
           />
         ) : null}

@@ -3,6 +3,18 @@ export const INTRO_SEQUENCE = [
   { src: '/images/intro-sequence-2.webp', width: 1920, height: 1196 },
 ] as const
 
+export const HEADER_LOGO = {
+  src: '/images/header-logo.webp',
+  width: 200,
+  height: 132,
+} as const
+
+export const HOME_PANEL = {
+  src: '/images/panel.webp',
+  width: 1024,
+  height: 286,
+} as const
+
 /** Wait until each URL has decoded (or `timeoutMs` elapses). */
 export function decodeImages(
   srcs: readonly string[],

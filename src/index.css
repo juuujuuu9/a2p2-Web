@@ -37,13 +37,13 @@
   --font-sauce: "Open Sauce One", system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   --font-dm: "DM Sans", system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   --font-sans: "Open Sauce One", system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  --color-bg: #fafafa;
-  --color-fg: #171717;
-  --color-muted: #525252;
-  --color-border: #e5e5e5;
-  --color-surface: #ffffff;
-  --color-accent: #2563eb;
-  --color-accent-fg: #ffffff;
+  --color-bg: #20263e;
+  --color-fg: #ffffff;
+  --color-muted: rgba(255, 255, 255, 0.78);
+  --color-border: rgba(255, 255, 255, 0.22);
+  --color-surface: #20263e;
+  --color-accent: #ffffff;
+  --color-accent-fg: #20263e;
 }
 
 @utility font-sauce-regular {

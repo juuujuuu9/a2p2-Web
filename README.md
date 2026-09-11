@@ -33,9 +33,13 @@ Layout, colors, fonts, and spacing are **not** in the markdown file. Those live 
 
 ## Images
 
-Put **resized WebP** files in [`public/images/`](public/images/). They are served from `/images/...` (for example `public/images/hero.webp` → `/images/hero.webp`).
+Do not commit PNG, JPEG, or Canva exports. Convert first:
 
-Export at about 2× the display size (the page column is 1024px wide). For logos, lossless WebP. Do not ship full-resolution Canva PNGs.
+```bash
+npm run optimize:images -- /path/to/source.png --name hero --kind photo
+```
+
+That writes a resized WebP to [`public/images/`](public/images/) (`public/images/hero.webp` → `/images/hero.webp`). `--kind` is `logo` (lossless, small UI), `graphic` (lossless intro/type), or `photo` (lossy). Re-encode everything already in the folder with `npm run optimize:images -- --all`. `brew install webp imagemagick` if `cwebp` / `magick` are missing.
 
 Above-the-fold / intro images must also be:
 

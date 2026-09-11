@@ -1,0 +1,34 @@
+---
+description: Visual style guide for the A2P2 site after the intro
+alwaysApply: true
+---
+
+# A2P2 visual style
+
+The Canva home frame is the spec. After the intro overlay, the page is **navy `#20263e` with white type** — not the old light gray scaffold.
+
+## Home (post-intro)
+
+Stacked full-bleed bands, no cards, no hero overlay, no rounded photo:
+
+1. **Header** — solid navy. Row 1: `HEADER_LOGO` + two-line tagline on the left; social icons + outline **Donate** on the right. Hairline, then row 2: left-aligned text nav (About, Our Story, Podcast, Featured Programs, Get Involved, Events, FAQ). Use `Header` from `src/components/Header.tsx` on every page — do not rebuild the chrome.
+2. **Photo** — `HOME_PANEL` from `src/lib/media.ts`. Edge-to-edge, no padding, no radius.
+3. **Mission** — white body on navy, wide measure, comfortable leading. CTA is a **line + arrow + “Learn More”**, not a filled button. Home ends here. Nav items are separate routes (`/about`, `/our-story`, …), not in-page sections.
+
+## Chrome
+
+- Site mark is `HEADER_LOGO` in `src/lib/media.ts`. Do not typeset `a²p²`.
+- Donate is `border` + transparent fill. Socials are 16px white icons.
+- Nav is plain text, no pills or underlines-at-rest.
+- Header is not a light bar and not sticky-blur.
+
+## Type and color
+
+- Open Sauce One: wordmark, nav, buttons, UI.
+- DM Sans: mission and long reading copy.
+- Tokens in `src/index.css`: `--color-bg` navy, `--color-fg` white. Do not reintroduce light `--color-surface` pages.
+- Hairlines are `white/20`. No accent blue.
+
+## Assets
+
+Follow `media.mdc`. Home photo is LCP after the intro — `HOME_PANEL` is preloaded in `index.html`.

@@ -15,12 +15,16 @@ export type SiteSection = {
 
 export type SiteContent = {
   siteTitle: string
+  tagline: string
   nav: NavItem[]
+  social: NavItem[]
+  donate: NavItem
   hero: {
     title: string
     lede: string
     ctaLabel: string
     ctaHref: string
+    image: string
   }
   sections: SiteSection[]
   contact: {
@@ -41,6 +45,12 @@ function markdownToHtml(value: unknown): string {
   const source = asString(value)
   if (!source) return ''
   return marked.parse(source, { async: false }) as string
+}
+
+function parseLabeledLink(value: unknown): NavItem {
+  if (!value || typeof value !== 'object') return { label: '', href: '' }
+  const record = value as Record<string, unknown>
+  return { label: asString(record.label), href: asString(record.href) }
 }
 
 function parseNav(value: unknown): NavItem[] {
@@ -85,12 +95,16 @@ export function parseSiteContent(raw: string): SiteContent {
 
   return {
     siteTitle: asString(frontmatter.siteTitle, 'Site'),
+    tagline: asString(frontmatter.tagline),
     nav: parseNav(frontmatter.nav),
+    social: parseNav(frontmatter.social),
+    donate: parseLabeledLink(frontmatter.donate),
     hero: {
       title: asString(hero.title, 'Welcome'),
       lede: asString(hero.lede),
-      ctaLabel: asString(hero.ctaLabel, 'Contact'),
-      ctaHref: asString(hero.ctaHref, '#contact'),
+      ctaLabel: asString(hero.ctaLabel, 'Learn More'),
+      ctaHref: asString(hero.ctaHref, '/about'),
+      image: asString(hero.image),
     },
     sections: parseSections(frontmatter.sections),
     contact: {

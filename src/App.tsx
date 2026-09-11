@@ -9,46 +9,75 @@ import { parseSiteContent } from './lib/parseContent'
 
 const site = parseSiteContent(siteMarkdown)
 
+function currentPath() {
+  return window.location.pathname.replace(/\/+$/, '') || '/'
+}
+
 function App() {
+  const path = currentPath()
+  const isHome = path === '/'
+  const section = site.sections.find((item) => `/${item.id}` === path)
+  const isContact = path === '/contact'
+
   useEffect(() => {
-    document.title = site.siteTitle
-  }, [])
+    const pageTitle = section?.title ?? (isContact ? site.contact.title : '')
+    document.title = pageTitle
+      ? `${pageTitle} — ${site.siteTitle}`
+      : site.siteTitle
+  }, [isContact, section])
 
   return (
-    <div id="top" className="font-sauce-regular min-h-svh bg-bg text-fg">
-      <IntroOverlay />
-      <Header siteTitle={site.siteTitle} nav={site.nav} />
+    <div className="font-sauce-regular min-h-svh bg-bg text-fg">
+      {isHome ? <IntroOverlay /> : null}
+      <Header
+        siteTitle={site.siteTitle}
+        tagline={site.tagline}
+        nav={site.nav}
+        social={site.social}
+        donate={site.donate}
+      />
       <main>
-        <Hero
-          title={site.hero.title}
-          lede={site.hero.lede}
-          ctaLabel={site.hero.ctaLabel}
-          ctaHref={site.hero.ctaHref}
-        />
-        {site.sections.map((section) => (
+        {isHome ? (
+          <Hero
+            title={site.hero.title}
+            lede={site.hero.lede}
+            ctaLabel={site.hero.ctaLabel}
+            ctaHref={site.hero.ctaHref}
+          />
+        ) : null}
+        {section ? (
           <ContentSection
-            key={section.id}
             id={section.id}
             title={section.title}
             html={section.html}
           />
-        ))}
-        <ContentSection
-          id="contact"
-          title={site.contact.title}
-          html={site.contact.html}
-        >
-          {site.contact.email ? (
-            <p className="mt-4 text-base">
-              <a
-                className="font-medium text-accent underline underline-offset-2"
-                href={`mailto:${site.contact.email}`}
-              >
-                {site.contact.email}
-              </a>
-            </p>
-          ) : null}
-        </ContentSection>
+        ) : null}
+        {isContact ? (
+          <ContentSection
+            id="contact"
+            title={site.contact.title}
+            html={site.contact.html}
+          >
+            {site.contact.email ? (
+              <p className="mt-4 text-base">
+                <a
+                  className="font-medium text-fg underline underline-offset-2"
+                  href={`mailto:${site.contact.email}`}
+                >
+                  {site.contact.email}
+                </a>
+              </p>
+            ) : null}
+          </ContentSection>
+        ) : null}
+        {!isHome && !section && !isContact ? (
+          <p className="mx-auto max-w-7xl px-6 py-16 sm:px-8 lg:px-12">
+            Page not found.{' '}
+            <a className="underline underline-offset-2" href="/">
+              Home
+            </a>
+          </p>
+        ) : null}
       </main>
       <Footer note={site.footer.note} />
     </div>

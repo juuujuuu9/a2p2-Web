@@ -18,7 +18,7 @@ Stacked full-bleed bands, no cards, no hero overlay, no rounded photo:
 ## Chrome
 
 - Site mark is `HEADER_LOGO` in `src/lib/media.ts`. Do not typeset `a²p²`.
-- Donate is `border` + transparent fill. Socials are 16px white icons.
+- Donate is `border` + transparent fill. Socials are 20px white icons. Header type is 17px.
 - Nav is plain text, no pills or underlines-at-rest.
 - Header is not a light bar and not sticky-blur.
 

@@ -10,7 +10,7 @@ export type HeaderProps = {
   donate: NavItem
 }
 
-const iconClass = 'h-4 w-4 fill-current'
+const iconClass = 'h-5 w-5 fill-current'
 
 function SocialGlyph({ label }: { label: string }) {
   switch (label.toLowerCase()) {
@@ -53,7 +53,7 @@ export function Header({ siteTitle, tagline, nav, social, donate }: HeaderProps)
   const [open, setOpen] = useState(false)
 
   return (
-    <header className="relative z-10 bg-bg text-fg">
+    <header className="relative z-10 bg-bg text-[17px] text-fg">
       <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-12">
         <div className="flex items-center justify-between gap-4 py-5 md:py-7">
           <a href="/" className="flex min-w-0 items-center gap-3 sm:gap-4">
@@ -62,11 +62,11 @@ export function Header({ siteTitle, tagline, nav, social, donate }: HeaderProps)
               width={HEADER_LOGO.width}
               height={HEADER_LOGO.height}
               alt={siteTitle}
-              className="h-12 w-auto shrink-0 sm:h-14"
+              className="h-16 w-auto shrink-0 sm:h-20"
               decoding="async"
             />
             {tagline ? (
-              <span className="font-sauce-regular hidden max-w-[11.5rem] text-[0.7rem] leading-snug whitespace-pre-line text-fg sm:block">
+              <span className="font-sauce-regular hidden max-w-[18rem] leading-snug whitespace-pre-line text-fg sm:block">
                 {tagline}
               </span>
             ) : null}
@@ -85,7 +85,7 @@ export function Header({ siteTitle, tagline, nav, social, donate }: HeaderProps)
             {donate.label && donate.href ? (
               <a
                 href={donate.href}
-                className="ml-1 border border-fg px-3 py-1 text-sm text-fg"
+                className="ml-1 border border-fg px-3.5 py-1.5 text-fg"
               >
                 {donate.label}
               </a>
@@ -93,7 +93,7 @@ export function Header({ siteTitle, tagline, nav, social, donate }: HeaderProps)
           </div>
           <button
             type="button"
-            className="inline-flex items-center rounded-sm border border-fg px-3 py-1.5 text-sm text-fg md:hidden"
+            className="inline-flex items-center rounded-sm border border-fg px-3.5 py-1.5 text-fg md:hidden"
             aria-expanded={open}
             aria-controls="site-nav"
             onClick={() => setOpen((value) => !value)}
@@ -109,7 +109,7 @@ export function Header({ siteTitle, tagline, nav, social, donate }: HeaderProps)
             <a
               key={item.href}
               href={item.href}
-              className="py-2 text-sm text-fg md:py-0"
+              className="py-2 text-fg md:py-0"
               onClick={() => setOpen(false)}
             >
               {item.label}
@@ -129,7 +129,7 @@ export function Header({ siteTitle, tagline, nav, social, donate }: HeaderProps)
             {donate.label && donate.href ? (
               <a
                 href={donate.href}
-                className="border border-fg px-3 py-1 text-sm text-fg"
+                className="border border-fg px-3.5 py-1.5 text-fg"
                 onClick={() => setOpen(false)}
               >
                 {donate.label}

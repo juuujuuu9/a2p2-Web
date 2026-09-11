@@ -3,6 +3,7 @@ import { HOME_PANEL } from '../lib/media'
 
 type HeroProps = {
   title: string
+  ledeTitle: string
   lede: string
   ctaLabel: string
   ctaHref: string
@@ -17,6 +18,7 @@ const copyClass =
 
 export function Hero({
   title,
+  ledeTitle,
   lede,
   ctaLabel,
   ctaHref,
@@ -25,10 +27,45 @@ export function Hero({
   principlesTitle,
   principles,
 }: HeroProps) {
+  const bandRef = useRef<HTMLDivElement>(null)
   const listRef = useRef<HTMLOListElement>(null)
+  const [ledeOn, setLedeOn] = useState(false)
+  const [missionOn, setMissionOn] = useState(false)
+  const [principlesOn, setPrinciplesOn] = useState(false)
   const [revealed, setRevealed] = useState<boolean[]>(() =>
     principles.map(() => false),
   )
+
+  useEffect(() => {
+    const root = bandRef.current
+    if (!root) return
+
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      setLedeOn(true)
+      setMissionOn(true)
+      setPrinciplesOn(true)
+      return
+    }
+
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (!entry.isIntersecting) continue
+          const flow = entry.target.getAttribute('data-flow')
+          if (flow === 'lede') setLedeOn(true)
+          if (flow === 'mission') setMissionOn(true)
+          if (flow === 'principles') setPrinciplesOn(true)
+          io.unobserve(entry.target)
+        }
+      },
+      { threshold: 0.25, rootMargin: '0px 0px -12% 0px' },
+    )
+
+    for (const item of root.querySelectorAll<HTMLElement>('[data-flow]')) {
+      io.observe(item)
+    }
+    return () => io.disconnect()
+  }, [])
 
   useEffect(() => {
     const root = listRef.current
@@ -89,30 +126,40 @@ export function Hero({
         className="h-auto w-full"
         decoding="async"
       />
-      <div className="bg-bg">
+      <div ref={bandRef} className="bg-bg">
         <div className="mx-auto max-w-7xl px-6 py-14 sm:px-8 sm:py-16 lg:px-12 lg:py-20">
-          {lede ? <p className={copyClass}>{lede}</p> : null}
-          {ctaLabel ? (
-            <a
-              href={ctaHref}
-              className="mt-8 inline-flex items-center gap-3 text-[17px] text-fg/80 hover:text-fg"
-            >
-              <svg
-                aria-hidden="true"
-                className="h-3 w-16 shrink-0"
-                viewBox="0 0 64 12"
-                fill="none"
+          <div
+            data-flow="lede"
+            className={ledeOn ? 'story-unravel' : 'story-pending'}
+          >
+            {ledeTitle ? (
+              <h2 className="font-sauce-regular mb-5 text-2xl tracking-tight text-fg sm:text-3xl">
+                {ledeTitle}
+              </h2>
+            ) : null}
+            {lede ? <p className={copyClass}>{lede}</p> : null}
+            {ctaLabel ? (
+              <a
+                href={ctaHref}
+                className="mt-8 inline-flex items-center gap-3 text-[17px] text-fg/80 hover:text-fg"
               >
-                <path
-                  d="M0 6h56l-4-4M56 6l-4 4"
-                  stroke="currentColor"
-                  strokeWidth="1.25"
-                  strokeLinejoin="miter"
-                />
-              </svg>
-              {ctaLabel}
-            </a>
-          ) : null}
+                <svg
+                  aria-hidden="true"
+                  className="h-3 w-16 shrink-0"
+                  viewBox="0 0 64 12"
+                  fill="none"
+                >
+                  <path
+                    d="M0 6h56l-4-4M56 6l-4 4"
+                    stroke="currentColor"
+                    strokeWidth="1.25"
+                    strokeLinejoin="miter"
+                  />
+                </svg>
+                {ctaLabel}
+              </a>
+            ) : null}
+          </div>
         </div>
         {missionBody || principles.length > 0 ? (
           <>
@@ -122,7 +169,10 @@ export function Hero({
               className="mx-auto max-w-7xl scroll-mt-8 px-6 py-14 sm:px-8 sm:py-16 lg:px-12 lg:py-20"
             >
               {missionBody ? (
-                <div>
+                <div
+                  data-flow="mission"
+                  className={missionOn ? 'story-unravel' : 'story-pending'}
+                >
                   <h2 className="font-sauce-regular mb-5 text-2xl tracking-tight text-fg sm:text-3xl">
                     {missionTitle}
                   </h2>
@@ -131,7 +181,12 @@ export function Hero({
               ) : null}
               {principles.length > 0 ? (
                 <div className={missionBody ? 'mt-14 sm:mt-16' : undefined}>
-                  <h2 className="font-sauce-regular mb-5 text-2xl tracking-tight text-fg sm:text-3xl">
+                  <h2
+                    data-flow="principles"
+                    className={`font-sauce-regular mb-5 text-2xl tracking-tight text-fg sm:text-3xl ${
+                      principlesOn ? 'story-unravel' : 'story-pending'
+                    }`}
+                  >
                     {principlesTitle}
                   </h2>
                   <ol ref={listRef} className="max-w-5xl">

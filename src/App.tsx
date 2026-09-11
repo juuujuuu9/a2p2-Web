@@ -40,6 +40,7 @@ function App() {
         {isHome ? (
           <Hero
             title={site.hero.title}
+            ledeTitle={site.hero.ledeTitle}
             lede={site.hero.lede}
             ctaLabel={site.hero.ctaLabel}
             ctaHref={site.hero.ctaHref}

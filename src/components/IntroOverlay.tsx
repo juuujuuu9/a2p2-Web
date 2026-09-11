@@ -77,7 +77,7 @@ export function IntroOverlay() {
             <br />
             of Psychodynamic Psychology
           </p>
-          <p className="intro-caption intro-caption-1">Welcome</p>
+          <p className="intro-caption intro-caption-1 italic">Welcome</p>
         </div>
       </div>
     </div>

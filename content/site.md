@@ -34,6 +34,7 @@ donate:
   href: "/get-involved"
 hero:
   title: Academics for the Advancement of Psychodynamic Psychology
+  ledeTitle: Who We Are
   lede: We are a group dedicated to the promotion of psychodynamic training, research, and practice. Over the past two decades, as an entire generation of psychodynamically-oriented professors have retired from their academic positions, the scope of doctoral training in psychotherapy has narrowed, and has become increasingly dominated by cognitive-behavioral perspectives only. Meanwhile, the need has never been greater for skilled clinicians who approach clinical work from diverse perspectives and who are capable of addressing a range of issues and struggles. Our group aims to address this gap and to expand the breadth of clinical training by supporting the development of academics with a strong background in psychodynamic models of psychotherapy.
   ctaLabel: Learn More
   ctaHref: "#mission"

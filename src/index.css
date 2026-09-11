@@ -208,6 +208,7 @@ body {
   color: #171717;
   font-size: clamp(2.25rem, 4.8vw, 3.5rem);
   font-weight: 700;
+  font-style: italic;
 }
 
 .intro-caption-2 {

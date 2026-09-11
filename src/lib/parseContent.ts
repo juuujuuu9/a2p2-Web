@@ -21,6 +21,7 @@ export type SiteContent = {
   donate: NavItem
   hero: {
     title: string
+    ledeTitle: string
     lede: string
     ctaLabel: string
     ctaHref: string
@@ -125,6 +126,7 @@ export function parseSiteContent(raw: string): SiteContent {
     donate: parseLabeledLink(frontmatter.donate),
     hero: {
       title: asString(hero.title, 'Welcome'),
+      ledeTitle: asString(hero.ledeTitle, 'Who We Are'),
       lede: asString(hero.lede),
       ctaLabel: asString(hero.ctaLabel, 'Learn More'),
       ctaHref: asString(hero.ctaHref, '#mission'),

@@ -13,8 +13,8 @@ Stacked full-bleed bands, no cards, no hero overlay, no rounded photo:
 
 1. **Header** — solid navy. Row 1: `HEADER_LOGO` + two-line tagline on the left; social icons + outline **Donate** on the right. Hairline, then row 2: left-aligned text nav (Our Story, Podcast, Programs & Pathways, Events, Get Involved, FAQ, Partnerships). Use `Header` from `src/components/Header.tsx` on every page — do not rebuild the chrome.
 2. **Photo** — `HOME_PANEL` from `src/lib/media.ts`. Edge-to-edge, no padding, no radius.
-3. **Lede** — white body on navy, wide measure, comfortable leading. CTA is a **line + arrow + “Learn More”**, not a filled button. It scrolls to `#mission`.
-4. **Our Mission + Our Principles** — same navy band, already on the page under the lede. Numbered principles (`01`–`06`) are bold Open Sauce One at 33.2px in `#7199ab`, with `white/20` hairlines; each principle unravels as it scrolls into view. Home ends here. Nav items are still separate routes (`/our-story`, `/podcast`, …).
+3. **Who We Are** — heading, then white body on navy, wide measure, comfortable leading. CTA is a **line + arrow + “Learn More”**, not a filled button. It scrolls to `#mission`. The block unravels as it scrolls into view. No caption under the home photo.
+4. **Our Mission + Our Principles** — same navy band, already on the page under Who We Are. Mission unravels as it scrolls into view. The Principles heading and numbered items (`01`–`06`) unravel as they scroll into view. Numbers are bold Open Sauce One at 33.2px in `#7199ab`, with `white/20` hairlines. Home ends here. Nav items are still separate routes (`/our-story`, `/podcast`, …).
 
 ## Chrome
 

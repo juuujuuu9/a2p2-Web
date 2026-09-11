@@ -27,7 +27,7 @@ function App() {
   }, [isContact, section])
 
   return (
-    <div className="font-sauce-regular min-h-svh overflow-x-hidden bg-bg text-fg">
+    <div className="font-sauce-regular min-h-svh bg-bg text-fg">
       {isHome ? <IntroOverlay /> : null}
       <Header
         siteTitle={site.siteTitle}
@@ -63,7 +63,7 @@ function App() {
             html={site.contact.html}
           >
             {site.contact.email ? (
-              <p className="mt-4 text-base">
+              <p className="mt-4 text-[18.8px]">
                 <a
                   className="font-medium text-fg underline underline-offset-2"
                   href={`mailto:${site.contact.email}`}

@@ -53,60 +53,67 @@ export function Header({ siteTitle, tagline, nav, social, donate }: HeaderProps)
   const [open, setOpen] = useState(false)
 
   return (
-    <header className="relative z-10 bg-bg text-[17px] text-fg">
-      <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-12">
-        <div className="flex items-center justify-between gap-4 py-5 md:py-7">
-          <a href="/" className="flex min-w-0 items-center gap-3 sm:gap-4">
-            <img
-              src={HEADER_LOGO.src}
-              width={HEADER_LOGO.width}
-              height={HEADER_LOGO.height}
-              alt={siteTitle}
-              className="h-16 w-auto shrink-0 sm:h-20"
-              decoding="async"
-            />
-            {tagline ? (
-              <span className="font-sauce-regular hidden max-w-[18rem] leading-snug whitespace-pre-line text-fg sm:block">
-                {tagline}
-              </span>
-            ) : null}
-          </a>
-          <div className="hidden items-center gap-4 md:flex">
-            {social.map((item) => (
-              <a
-                key={item.label}
-                href={item.href}
-                className="text-fg hover:opacity-80"
-                aria-label={item.label}
-              >
-                <SocialGlyph label={item.label} />
-              </a>
-            ))}
-            {donate.label && donate.href ? (
-              <a
-                href={donate.href}
-                className="ml-1 border border-fg px-3.5 py-1.5 text-fg"
-              >
-                {donate.label}
-              </a>
-            ) : null}
+    <>
+      <header className="bg-bg text-[17px] text-fg">
+        <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-12">
+          <div className="flex items-center justify-between gap-4 py-5 md:py-7">
+            <a href="/" className="flex min-w-0 items-center gap-3 sm:gap-4">
+              <img
+                src={HEADER_LOGO.src}
+                width={HEADER_LOGO.width}
+                height={HEADER_LOGO.height}
+                alt={siteTitle}
+                className="h-16 w-auto shrink-0 sm:h-20"
+                decoding="async"
+              />
+              {tagline ? (
+                <span className="font-sauce-regular hidden max-w-[18rem] leading-snug whitespace-pre-line text-fg sm:block">
+                  {tagline}
+                </span>
+              ) : null}
+            </a>
+            <div className="hidden items-center gap-4 md:flex">
+              {social.map((item) => (
+                <a
+                  key={item.label}
+                  href={item.href}
+                  className="text-fg hover:opacity-80"
+                  aria-label={item.label}
+                >
+                  <SocialGlyph label={item.label} />
+                </a>
+              ))}
+              {donate.label && donate.href ? (
+                <a
+                  href={donate.href}
+                  className="ml-1 border border-fg px-3.5 py-1.5 text-fg"
+                >
+                  {donate.label}
+                </a>
+              ) : null}
+            </div>
           </div>
+        </div>
+      </header>
+      <nav
+        id="site-nav"
+        className="sticky top-0 z-20 border-y border-fg/20 bg-bg text-[17px] text-fg"
+      >
+        <div className="mx-auto flex max-w-7xl justify-end px-6 py-3 sm:px-8 md:hidden lg:px-12">
           <button
             type="button"
-            className="inline-flex items-center rounded-sm border border-fg px-3.5 py-1.5 text-fg md:hidden"
+            className="inline-flex items-center rounded-sm border border-fg px-3.5 py-1.5 text-fg"
             aria-expanded={open}
-            aria-controls="site-nav"
+            aria-controls="site-nav-links"
             onClick={() => setOpen((value) => !value)}
           >
             {open ? 'Close' : 'Menu'}
           </button>
         </div>
-      </div>
-      <hr className="border-0 border-t border-fg/20" />
-      <nav
-        id="site-nav"
-        className={`${open ? 'flex' : 'hidden'} mx-auto max-w-7xl flex-col gap-1 px-6 py-3 sm:px-8 md:flex md:flex-row md:flex-wrap md:items-center md:gap-6 md:py-3.5 lg:px-12`}
-      >
+        <div
+          id="site-nav-links"
+          className={`${open ? 'flex' : 'hidden'} mx-auto max-w-7xl flex-col gap-1 px-6 pb-3 sm:px-8 md:flex md:flex-row md:flex-wrap md:items-center md:gap-6 md:py-3.5 lg:px-12`}
+        >
           {nav.map((item) => (
             <a
               key={item.href}
@@ -117,28 +124,29 @@ export function Header({ siteTitle, tagline, nav, social, donate }: HeaderProps)
               {item.label}
             </a>
           ))}
-        <div className="mt-2 flex items-center gap-4 py-2 md:hidden">
-          {social.map((item) => (
-            <a
-              key={`mobile-${item.label}`}
-              href={item.href}
-              className="text-fg"
-              aria-label={item.label}
-            >
-              <SocialGlyph label={item.label} />
-            </a>
-          ))}
-          {donate.label && donate.href ? (
-            <a
-              href={donate.href}
-              className="border border-fg px-3.5 py-1.5 text-fg"
-              onClick={() => setOpen(false)}
-            >
-              {donate.label}
-            </a>
-          ) : null}
+          <div className="mt-2 flex items-center gap-4 py-2 md:hidden">
+            {social.map((item) => (
+              <a
+                key={`mobile-${item.label}`}
+                href={item.href}
+                className="text-fg"
+                aria-label={item.label}
+              >
+                <SocialGlyph label={item.label} />
+              </a>
+            ))}
+            {donate.label && donate.href ? (
+              <a
+                href={donate.href}
+                className="border border-fg px-3.5 py-1.5 text-fg"
+                onClick={() => setOpen(false)}
+              >
+                {donate.label}
+              </a>
+            ) : null}
+          </div>
         </div>
       </nav>
-    </header>
+    </>
   )
 }

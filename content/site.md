@@ -26,8 +26,8 @@
 #     a matching icon in src/components/Header.tsx (SocialGlyph).
 #   A page that needs its own layout (the podcast is the model): add a new
 #     top-level region and a component. Do not also list it under `sections`.
-#   Guest portraits for the podcast stay in src/components/Podcast.tsx.
-#     Each photo has a fixed pixel size, so names and images are not fields here.
+#   A Season 1 guest: append under `podcast.seasonOne.guests` (name, image,
+#     width, height from `npm run optimize:images`, optional role, bio).
 
 # ---------------------------------------------------------------------------
 # identity
@@ -107,6 +107,9 @@ principles:
 # `episodes` is the list under Episodes. `code` is the colored label
 # (S1 E1). `title` is the link text. `href` is the episode page.
 # Omit href to show the title as plain text.
+# `seasonOne.guests`: grid headshots; click opens the bio panel (desktop:
+# slides in from the right). `image` is the public path (/images/….webp).
+# `width` and `height` must match the optimizer output on the `<img>`.
 # ---------------------------------------------------------------------------
 
 podcast:
@@ -143,6 +146,64 @@ podcast:
     - code: S1 E7
       title: "Bridging the Gap: How Research and Practice Diverge in Psychology with Dr. Jonathan Shedler"
       href: "https://podcasts.apple.com/us/podcast/bridging-the-gap-how-research-and-practice-diverge/id1896817346?i=1000775967201"
+  seasonOne:
+    title: Season 1
+    guests:
+      - name: Bevin Campbell, Psy.D.
+        role: Host
+        image: /images/bevin-campbell.webp
+        width: 682
+        height: 1024
+        bio: |
+          Bevin Campbell, Psy.D., is host and executive producer of In Depth: Psychoanalysis in the Academy.
+      - name: J. Christopher Muran, Ph.D.
+        image: /images/christopher-muran.webp
+        width: 744
+        height: 1024
+        bio: |
+          J. Christopher Muran, Ph.D., is a professor and psychotherapy researcher whose work bridges psychoanalysis, process research, and pluralistic training.
+      - name: Jonathan Shedler, Ph.D.
+        image: /images/jonathan-shedler.webp
+        width: 702
+        height: 1024
+        bio: |
+          Jonathan Shedler, Ph.D., is a clinical psychologist and researcher known for work on psychodynamic psychotherapy, personality, and the research–practice divide in psychology.
+      - name: Daniel José Gaztambide, Psy.D.
+        image: /images/daniel-gaztambide.webp
+        width: 851
+        height: 1024
+        bio: |
+          Daniel José Gaztambide, Psy.D., is a psychoanalyst and scholar whose work connects psychoanalysis, social justice, and decolonial approaches to mental health.
+      - name: Kimberlyn Leary, Ph.D.
+        image: /images/kimberlyn-leary.webp
+        width: 1024
+        height: 1024
+        bio: |
+          Kimberlyn Leary, Ph.D., is a psychoanalyst and policy expert whose career spans clinical work, leadership, negotiation, and systemic change in health and equity.
+      - name: Chris Hopwood, Ph.D.
+        image: /images/chris-hopwood.webp
+        width: 934
+        height: 1024
+        bio: |
+          Chris Hopwood, Ph.D., integrates psychodynamic and interpersonal theory with quantitative personality research and assessment.
+      - name: Paul Wachtel, Ph.D.
+        image: /images/paul-wachtel.webp
+        width: 767
+        height: 1024
+        bio: |
+          Paul Wachtel, Ph.D., is a psychologist and author known for integrative and relational approaches that connect psychoanalysis with other therapeutic traditions.
+      - name: Nancy McWilliams, Ph.D.
+        image: /images/nancy-mcwilliams.webp
+        width: 1024
+        height: 1024
+        bio: |
+          Nancy McWilliams, Ph.D., ABPP, is Visiting Professor Emerita at Rutgers Graduate School of Applied and Professional Psychology and maintains a private practice in Lambertville, NJ. She has authored four textbooks on psychoanalytic diagnosis and psychodynamic treatment, co-edited the Psychodynamic Diagnostic Manual, and is a former president of the Society for Psychoanalysis and Psychoanalytic Psychology of the APA. Her books are in 20 languages and she has taught in 30 countries.
+      - name: Leora Trub, Ph.D.
+        image: /images/leora-trub.webp
+        width: 1024
+        height: 1024
+        bio: |
+          Leora Trub, Ph.D., is a psychologist, educator, and founding member of Academics for the Advancement of Psychodynamic Psychology (a²p²).
 
 # ---------------------------------------------------------------------------
 # pages

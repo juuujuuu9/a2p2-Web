@@ -126,6 +126,24 @@ h6 {
   margin-top: 0.35em;
 }
 
+@keyframes guest-panel-in {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes guest-sheet-up {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
 @keyframes story-unravel {
   from {
     opacity: 0;

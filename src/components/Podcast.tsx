@@ -1,66 +1,110 @@
+import { useEffect, useId, useState } from 'react'
 import { PODCAST_MARK } from '../lib/media'
-import { newTabProps, type PodcastContent } from '../lib/parseContent'
-
-/** Guest portraits. Show copy, listen links, and episode links are in content/site.md. */
-const seasonOne = [
-  {
-    src: '/images/bevin-campbell.webp',
-    width: 682,
-    height: 1024,
-    name: 'Bevin Campbell, Psy.D.',
-    role: 'Host',
-  },
-  {
-    src: '/images/christopher-muran.webp',
-    width: 744,
-    height: 1024,
-    name: 'J. Christopher Muran, Ph.D.',
-  },
-  {
-    src: '/images/jonathan-shedler.webp',
-    width: 702,
-    height: 1024,
-    name: 'Jonathan Shedler, Ph.D.',
-  },
-  {
-    src: '/images/daniel-gaztambide.webp',
-    width: 851,
-    height: 1024,
-    name: 'Daniel José Gaztambide, Psy.D.',
-  },
-  {
-    src: '/images/kimberlyn-leary.webp',
-    width: 1024,
-    height: 1024,
-    name: 'Kimberlyn Leary, Ph.D.',
-  },
-  {
-    src: '/images/chris-hopwood.webp',
-    width: 934,
-    height: 1024,
-    name: 'Chris Hopwood, Ph.D.',
-  },
-  {
-    src: '/images/paul-wachtel.webp',
-    width: 767,
-    height: 1024,
-    name: 'Paul Wachtel, Ph.D.',
-  },
-  {
-    src: '/images/nancy-mcwilliams.webp',
-    width: 1024,
-    height: 1024,
-    name: 'Nancy McWilliams, Ph.D.',
-  },
-  {
-    src: '/images/leora-trub.webp',
-    width: 1024,
-    height: 1024,
-    name: 'Leora Trub, Ph.D.',
-  },
-] as const
+import { newTabProps, type PodcastContent, type PodcastGuest } from '../lib/parseContent'
 
 const linkClass = 'hover:opacity-80'
+
+const guestDots =
+  'mx-auto mt-3 block h-2 w-1/2 bg-[radial-gradient(circle,#7199ab_2px,transparent_2.15px)] bg-size-[9px_8px] bg-center bg-repeat-x'
+
+function GuestPortrait({
+  guest,
+  className = 'aspect-square w-full rounded-full object-cover object-top',
+}: {
+  guest: PodcastGuest
+  className?: string
+}) {
+  return (
+    <img
+      src={guest.image}
+      width={guest.width}
+      height={guest.height}
+      alt=""
+      className={className}
+      loading="lazy"
+      decoding="async"
+    />
+  )
+}
+
+function GuestBioPanel({
+  guest,
+  titleId,
+  onClose,
+  motion,
+}: {
+  guest: PodcastGuest
+  titleId: string
+  onClose: () => void
+  motion: boolean
+}) {
+  return (
+    <>
+      <button
+        type="button"
+        className="fixed inset-0 z-40 bg-bg/70 md:bg-black/40"
+        aria-label="Close bio"
+        onClick={onClose}
+      />
+      <div
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby={titleId}
+        className={`fixed inset-x-0 bottom-0 z-50 flex max-h-[90dvh] flex-col rounded-t-2xl border-t border-fg/20 bg-bg px-6 text-fg shadow-xl sm:px-8 md:inset-x-auto md:inset-y-0 md:right-0 md:max-h-none md:w-full md:max-w-md md:rounded-none md:border-t-0 md:border-l md:px-10 ${
+          motion
+            ? 'animate-[guest-sheet-up_0.35s_ease-out] md:animate-[guest-panel-in_0.35s_ease-out]'
+            : ''
+        }`}
+      >
+        <div className="shrink-0 pt-3 md:pt-6">
+          <div
+            aria-hidden
+            className="mx-auto mb-3 h-1 w-10 rounded-full bg-fg/25 md:hidden"
+          />
+          <div className="flex justify-end">
+            <button
+              type="button"
+              className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-fg/30 text-fg hover:bg-fg/10"
+              aria-label="Close bio"
+              onClick={onClose}
+            >
+              <svg
+                className="h-4 w-4"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                aria-hidden="true"
+              >
+                <path d="M18 6 6 18M6 6l12 12" />
+              </svg>
+            </button>
+          </div>
+        </div>
+        <div className="overflow-y-auto pb-10 pt-2 md:pb-12 md:pt-4">
+          <div className="mx-auto w-48 sm:w-56">
+            <GuestPortrait guest={guest} />
+            <span aria-hidden className={guestDots} />
+          </div>
+          <h2 id={titleId} className="mt-6 text-center text-fg">
+            {guest.name}
+          </h2>
+          {guest.role ? (
+            <p className="mt-1 text-center font-sauce-bold text-base text-fg">
+              {guest.role}
+            </p>
+          ) : null}
+          {guest.bio ? (
+            <p className="font-dm-regular mt-8 text-[18pt] leading-[1.7] text-fg">
+              {guest.bio}
+            </p>
+          ) : null}
+        </div>
+      </div>
+    </>
+  )
+}
 
 export function Podcast({
   title,
@@ -69,7 +113,28 @@ export function Podcast({
   listenLabel,
   listen,
   episodes,
+  seasonOne,
 }: PodcastContent) {
+  const [activeGuest, setActiveGuest] = useState<PodcastGuest | null>(null)
+  const titleId = useId()
+  const motion =
+    typeof window !== 'undefined' &&
+    !window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
+  useEffect(() => {
+    if (!activeGuest) return
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') setActiveGuest(null)
+    }
+    document.addEventListener('keydown', onKey)
+    const prevOverflow = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    return () => {
+      document.removeEventListener('keydown', onKey)
+      document.body.style.overflow = prevOverflow
+    }
+  }, [activeGuest])
+
   return (
     <>
       <section className="bg-bg">
@@ -169,37 +234,41 @@ export function Podcast({
             id="season-1"
             className="font-sauce-bold text-center text-2xl tracking-tight sm:text-3xl"
           >
-            Season 1
+            {seasonOne.title}
           </h2>
           <ul className="mt-12 grid grid-cols-3 gap-x-4 gap-y-10 sm:mt-14 sm:gap-x-8 sm:gap-y-14">
-            {seasonOne.map((person) => (
-              <li key={person.src} className="text-center">
-                <img
-                  src={person.src}
-                  width={person.width}
-                  height={person.height}
-                  alt=""
-                  className="aspect-square w-full rounded-full object-cover object-top"
-                  loading="lazy"
-                  decoding="async"
-                />
-                <span
-                  aria-hidden
-                  className="mx-auto mt-3 block h-2 w-1/2 bg-[radial-gradient(circle,#7199ab_2px,transparent_2.15px)] bg-size-[9px_8px] bg-center bg-repeat-x"
-                />
-                <p className="mt-2.5 font-sauce-bold text-[13px] leading-snug sm:text-base">
-                  {person.name}
-                </p>
-                {'role' in person ? (
-                  <p className="font-sauce-bold text-[13px] leading-snug sm:text-base">
-                    {person.role}
+            {seasonOne.guests.map((guest) => (
+              <li key={guest.image}>
+                <button
+                  type="button"
+                  className="w-full cursor-pointer text-center hover:opacity-90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-fg/50"
+                  aria-haspopup="dialog"
+                  onClick={() => setActiveGuest(guest)}
+                >
+                  <GuestPortrait guest={guest} />
+                  <span aria-hidden className={guestDots} />
+                  <p className="mt-2.5 font-sauce-bold text-[13px] leading-snug sm:text-base">
+                    {guest.name}
                   </p>
-                ) : null}
+                  {guest.role ? (
+                    <p className="font-sauce-bold text-[13px] leading-snug sm:text-base">
+                      {guest.role}
+                    </p>
+                  ) : null}
+                </button>
               </li>
             ))}
           </ul>
         </div>
       </section>
+      {activeGuest ? (
+        <GuestBioPanel
+          guest={activeGuest}
+          titleId={titleId}
+          onClose={() => setActiveGuest(null)}
+          motion={motion}
+        />
+      ) : null}
     </>
   )
 }

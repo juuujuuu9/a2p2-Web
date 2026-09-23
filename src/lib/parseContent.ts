@@ -19,6 +19,20 @@ export type PodcastEpisode = {
   href: string
 }
 
+export type PodcastGuest = {
+  name: string
+  role: string
+  image: string
+  width: number
+  height: number
+  bio: string
+}
+
+export type PodcastSeason = {
+  title: string
+  guests: PodcastGuest[]
+}
+
 export type PodcastContent = {
   title: string
   welcome: string
@@ -26,6 +40,7 @@ export type PodcastContent = {
   listenLabel: string
   listen: NavItem[]
   episodes: PodcastEpisode[]
+  seasonOne: PodcastSeason
 }
 
 export type SiteContent = {
@@ -64,6 +79,15 @@ export type SiteContent = {
 
 function asString(value: unknown, fallback = ''): string {
   return typeof value === 'string' ? value.trim() : fallback
+}
+
+function asNumber(value: unknown, fallback = 0): number {
+  if (typeof value === 'number' && Number.isFinite(value)) return value
+  if (typeof value === 'string' && value.trim()) {
+    const parsed = Number(value)
+    if (Number.isFinite(parsed)) return parsed
+  }
+  return fallback
 }
 
 function markdownToHtml(value: unknown): string {
@@ -115,6 +139,38 @@ function parseEpisodes(value: unknown): PodcastEpisode[] {
   })
 }
 
+function parseGuests(value: unknown): PodcastGuest[] {
+  if (!Array.isArray(value)) return []
+  return value.flatMap((item) => {
+    if (!item || typeof item !== 'object') return []
+    const record = item as Record<string, unknown>
+    const name = asString(record.name)
+    const image = asString(record.image)
+    const width = asNumber(record.width)
+    const height = asNumber(record.height)
+    if (!name || !image || !width || !height) return []
+    return [
+      {
+        name,
+        role: asString(record.role),
+        image,
+        width,
+        height,
+        bio: asString(record.bio),
+      },
+    ]
+  })
+}
+
+function parseSeason(value: unknown, fallbackTitle: string): PodcastSeason {
+  const season =
+    value && typeof value === 'object' ? (value as Record<string, unknown>) : {}
+  return {
+    title: asString(season.title, fallbackTitle),
+    guests: parseGuests(season.guests),
+  }
+}
+
 function parsePodcast(value: unknown): PodcastContent {
   const podcast =
     value && typeof value === 'object' ? (value as Record<string, unknown>) : {}
@@ -125,6 +181,7 @@ function parsePodcast(value: unknown): PodcastContent {
     listenLabel: asString(podcast.listenLabel, 'Listen Now'),
     listen: parseNav(podcast.listen),
     episodes: parseEpisodes(podcast.episodes),
+    seasonOne: parseSeason(podcast.seasonOne, 'Season 1'),
   }
 }
 

@@ -13,6 +13,21 @@ export type SiteSection = {
   html: string
 }
 
+export type PodcastEpisode = {
+  code: string
+  title: string
+  href: string
+}
+
+export type PodcastContent = {
+  title: string
+  welcome: string
+  description: string
+  listenLabel: string
+  listen: NavItem[]
+  episodes: PodcastEpisode[]
+}
+
 export type SiteContent = {
   siteTitle: string
   tagline: string
@@ -35,6 +50,7 @@ export type SiteContent = {
     title: string
     items: string[]
   }
+  podcast: PodcastContent
   sections: SiteSection[]
   contact: {
     title: string
@@ -74,12 +90,42 @@ function parseNav(value: unknown): NavItem[] {
   })
 }
 
+/** http(s) links leave the site; everything else stays in this tab. */
+export function newTabProps(href: string): { target?: '_blank'; rel?: 'noreferrer' } {
+  return /^https?:\/\//i.test(href) ? { target: '_blank', rel: 'noreferrer' } : {}
+}
+
 function parseStringList(value: unknown): string[] {
   if (!Array.isArray(value)) return []
   return value.flatMap((item) => {
     const text = asString(item)
     return text ? [text] : []
   })
+}
+
+function parseEpisodes(value: unknown): PodcastEpisode[] {
+  if (!Array.isArray(value)) return []
+  return value.flatMap((item) => {
+    if (!item || typeof item !== 'object') return []
+    const record = item as Record<string, unknown>
+    const code = asString(record.code)
+    const title = asString(record.title)
+    if (!code || !title) return []
+    return [{ code, title, href: asString(record.href) }]
+  })
+}
+
+function parsePodcast(value: unknown): PodcastContent {
+  const podcast =
+    value && typeof value === 'object' ? (value as Record<string, unknown>) : {}
+  return {
+    title: asString(podcast.title, 'In-Depth Podcast'),
+    welcome: asString(podcast.welcome),
+    description: asString(podcast.description),
+    listenLabel: asString(podcast.listenLabel, 'Listen Now'),
+    listen: parseNav(podcast.listen),
+    episodes: parseEpisodes(podcast.episodes),
+  }
 }
 
 function parseSections(value: unknown): SiteSection[] {
@@ -140,6 +186,7 @@ export function parseSiteContent(raw: string): SiteContent {
       title: asString(principles.title, 'Our Principles'),
       items: parseStringList(principles.items),
     },
+    podcast: parsePodcast(frontmatter.podcast),
     sections: parseSections(frontmatter.sections),
     contact: {
       title: asString(contact.title, 'Contact'),

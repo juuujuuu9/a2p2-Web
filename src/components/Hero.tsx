@@ -14,7 +14,7 @@ type HeroProps = {
 }
 
 const copyClass =
-  'font-dm-regular max-w-5xl text-[18.8px] leading-[1.7] text-fg'
+  'font-dm-regular max-w-5xl text-[18pt] leading-[1.7] text-fg'
 
 export function Hero({
   title,
@@ -141,7 +141,7 @@ export function Hero({
             {ctaLabel ? (
               <a
                 href={ctaHref}
-                className="mt-8 inline-flex items-center gap-3 text-[17px] text-fg/80 hover:text-fg"
+                className="mt-8 inline-flex items-center gap-3 text-[18pt] text-fg/80 hover:text-fg"
               >
                 <svg
                   aria-hidden="true"
@@ -173,7 +173,7 @@ export function Hero({
                   data-flow="mission"
                   className={missionOn ? 'story-unravel' : 'story-pending'}
                 >
-                  <h2 className="font-sauce-regular mb-5 text-2xl tracking-tight text-fg sm:text-3xl">
+                  <h2 className="mb-5 text-fg">
                     {missionTitle}
                   </h2>
                   <p className={copyClass}>{missionBody}</p>
@@ -183,7 +183,7 @@ export function Hero({
                 <div className={missionBody ? 'mt-14 sm:mt-16' : undefined}>
                   <h2
                     data-flow="principles"
-                    className={`font-sauce-regular mb-5 text-2xl tracking-tight text-fg sm:text-3xl ${
+                    className={`mb-5 text-fg ${
                       principlesOn ? 'story-unravel' : 'story-pending'
                     }`}
                   >

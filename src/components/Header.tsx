@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { HEADER_LOGO } from '../lib/media'
-import type { NavItem } from '../lib/parseContent'
+import { newTabProps, type NavItem } from '../lib/parseContent'
 
 export type HeaderProps = {
   siteTitle: string
@@ -79,6 +79,7 @@ export function Header({ siteTitle, tagline, nav, social, donate }: HeaderProps)
                   href={item.href}
                   className="text-fg hover:opacity-80"
                   aria-label={item.label}
+                  {...newTabProps(item.href)}
                 >
                   <SocialGlyph label={item.label} />
                 </a>
@@ -87,6 +88,7 @@ export function Header({ siteTitle, tagline, nav, social, donate }: HeaderProps)
                 <a
                   href={donate.href}
                   className="ml-1 border border-fg px-3.5 py-1.5 text-fg"
+                  {...newTabProps(donate.href)}
                 >
                   {donate.label}
                 </a>
@@ -97,7 +99,7 @@ export function Header({ siteTitle, tagline, nav, social, donate }: HeaderProps)
       </header>
       <nav
         id="site-nav"
-        className="sticky top-0 z-20 border-y border-fg/20 bg-bg text-[17px] text-fg"
+        className="sticky top-0 z-20 border-y border-fg/20 bg-bg text-[17pt] text-fg"
       >
         <div className="mx-auto flex max-w-7xl justify-end px-6 py-3 sm:px-8 md:hidden lg:px-12">
           <button
@@ -131,6 +133,7 @@ export function Header({ siteTitle, tagline, nav, social, donate }: HeaderProps)
                 href={item.href}
                 className="text-fg"
                 aria-label={item.label}
+                {...newTabProps(item.href)}
               >
                 <SocialGlyph label={item.label} />
               </a>
@@ -140,6 +143,7 @@ export function Header({ siteTitle, tagline, nav, social, donate }: HeaderProps)
                 href={donate.href}
                 className="border border-fg px-3.5 py-1.5 text-fg"
                 onClick={() => setOpen(false)}
+                {...newTabProps(donate.href)}
               >
                 {donate.label}
               </a>

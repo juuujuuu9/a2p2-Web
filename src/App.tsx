@@ -5,6 +5,7 @@ import { Footer } from './components/Footer'
 import { Header } from './components/Header'
 import { Hero } from './components/Hero'
 import { IntroOverlay } from './components/IntroOverlay'
+import { Podcast } from './components/Podcast'
 import { parseSiteContent } from './lib/parseContent'
 
 const site = parseSiteContent(siteMarkdown)
@@ -16,15 +17,18 @@ function currentPath() {
 function App() {
   const path = currentPath()
   const isHome = path === '/'
+  const isPodcast = path === '/podcast'
   const section = site.sections.find((item) => `/${item.id}` === path)
   const isContact = path === '/contact'
 
   useEffect(() => {
-    const pageTitle = section?.title ?? (isContact ? site.contact.title : '')
+    const pageTitle = isPodcast
+      ? site.podcast.title
+      : (section?.title ?? (isContact ? site.contact.title : ''))
     document.title = pageTitle
       ? `${pageTitle} — ${site.siteTitle}`
       : site.siteTitle
-  }, [isContact, section])
+  }, [isContact, isPodcast, section])
 
   return (
     <div className="font-sauce-regular min-h-svh bg-bg text-fg">
@@ -50,7 +54,8 @@ function App() {
             principles={site.principles.items}
           />
         ) : null}
-        {section ? (
+        {isPodcast ? <Podcast {...site.podcast} /> : null}
+        {section && !isPodcast ? (
           <ContentSection
             id={section.id}
             title={section.title}
@@ -64,7 +69,7 @@ function App() {
             html={site.contact.html}
           >
             {site.contact.email ? (
-              <p className="mt-4 text-[18.8px]">
+              <p className="mt-4 text-[18pt]">
                 <a
                   className="font-medium text-fg underline underline-offset-2"
                   href={`mailto:${site.contact.email}`}
@@ -75,7 +80,7 @@ function App() {
             ) : null}
           </ContentSection>
         ) : null}
-        {!isHome && !section && !isContact ? (
+        {!isHome && !isPodcast && !section && !isContact ? (
           <p className="mx-auto max-w-7xl px-6 py-16 sm:px-8 lg:px-12">
             Page not found.{' '}
             <a className="underline underline-offset-2" href="/">

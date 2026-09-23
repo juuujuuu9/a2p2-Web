@@ -19,14 +19,14 @@ Stacked full-bleed bands, no cards, no hero overlay, no rounded photo:
 ## Chrome
 
 - Site mark is `HEADER_LOGO` in `src/lib/media.ts`. Do not typeset `a²p²`.
-- Donate is `border` + transparent fill. Socials are 20px white icons. Header type is 17px.
+- Donate is `border` + transparent fill. Socials are 20px white icons. Header type is 17px. Nav links are 17pt.
 - Nav is plain text, no pills or underlines-at-rest.
 - Logo bar scrolls away. Text nav is solid navy and sticky at the viewport top; no blur.
 
 ## Type and color
 
 - Open Sauce One: wordmark, nav, buttons, UI.
-- DM Sans: mission and long reading copy, 18.8px.
+- DM Sans: mission and long reading copy, 18pt.
 - Tokens in `src/index.css`: `--color-bg` navy, `--color-fg` white. Do not reintroduce light `--color-surface` pages.
 - Hairlines are `white/20`. Principle numbers use `#7199ab`; do not add other accent blues.
 

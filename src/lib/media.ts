@@ -15,6 +15,12 @@ export const HOME_PANEL = {
   height: 375,
 } as const
 
+export const PODCAST_MARK = {
+  src: '/images/podcast-mark.webp',
+  width: 512,
+  height: 512,
+} as const
+
 /** Wait until each URL has decoded (or `timeoutMs` elapses). */
 export function decodeImages(
   srcs: readonly string[],

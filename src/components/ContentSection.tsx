@@ -21,7 +21,7 @@ export function ContentSection({
         </h1>
         {html ? (
           <div
-            className="prose-site font-dm-regular text-[18.8px] leading-relaxed text-muted"
+            className="prose-site font-dm-regular text-[18pt] leading-relaxed text-muted"
             dangerouslySetInnerHTML={{ __html: html }}
           />
         ) : null}

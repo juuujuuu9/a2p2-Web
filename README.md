@@ -24,10 +24,11 @@ npm run preview
 
 All page copy is in [`content/site.md`](content/site.md).
 
-1. Open `content/site.md`.
-2. Change the YAML frontmatter fields (`siteTitle`, `nav`, `hero`, `sections`, `contact`, `footer`).
-3. Section and contact bodies are markdown. They support paragraphs, lists, and links.
-4. Save, then refresh locally. On Netlify, a git push rebuilds and publishes the change.
+1. Open `content/site.md`. The comment at the top is the map: identity, header, home, podcast, pages, contact, footer.
+2. Change the field for that region. Header social icons are `social`. Podcast episode titles and the Apple and Spotify links are under `podcast`.
+3. An `href` that starts with `http://` or `https://` opens in a new tab. A path (`/podcast`, `#mission`) stays on this site.
+4. Section and contact bodies are markdown. They support paragraphs, lists, and links.
+5. Save, then refresh locally. On Netlify, a git push rebuilds and publishes the change.
 
 Layout, colors, fonts, and spacing are **not** in the markdown file. Those live in React components under `src/` and in `src/index.css`.
 

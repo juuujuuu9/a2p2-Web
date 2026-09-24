@@ -21,6 +21,12 @@ export const PODCAST_MARK = {
   height: 512,
 } as const
 
+export const FAQ_HERO = {
+  src: '/images/faq-hero.webp',
+  width: 1024,
+  height: 448,
+} as const
+
 /** Wait until each URL has decoded (or `timeoutMs` elapses). */
 export function decodeImages(
   srcs: readonly string[],

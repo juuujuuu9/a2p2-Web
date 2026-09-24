@@ -5,6 +5,7 @@ import { Footer } from './components/Footer'
 import { Header } from './components/Header'
 import { Hero } from './components/Hero'
 import { IntroOverlay } from './components/IntroOverlay'
+import { Faq } from './components/Faq'
 import { Podcast } from './components/Podcast'
 import { parseSiteContent } from './lib/parseContent'
 
@@ -18,17 +19,20 @@ function App() {
   const path = currentPath()
   const isHome = path === '/'
   const isPodcast = path === '/podcast'
+  const isFaq = path === '/faq'
   const section = site.sections.find((item) => `/${item.id}` === path)
   const isContact = path === '/contact'
 
   useEffect(() => {
     const pageTitle = isPodcast
       ? site.podcast.title
-      : (section?.title ?? (isContact ? site.contact.title : ''))
+      : isFaq
+        ? site.faq.title
+        : (section?.title ?? (isContact ? site.contact.title : ''))
     document.title = pageTitle
       ? `${pageTitle} — ${site.siteTitle}`
       : site.siteTitle
-  }, [isContact, isPodcast, section])
+  }, [isContact, isFaq, isPodcast, section])
 
   return (
     <div className="font-sauce-regular min-h-svh bg-bg text-fg">
@@ -55,7 +59,8 @@ function App() {
           />
         ) : null}
         {isPodcast ? <Podcast {...site.podcast} /> : null}
-        {section && !isPodcast ? (
+        {isFaq ? <Faq {...site.faq} /> : null}
+        {section && !isPodcast && !isFaq ? (
           <ContentSection
             id={section.id}
             title={section.title}
@@ -80,7 +85,7 @@ function App() {
             ) : null}
           </ContentSection>
         ) : null}
-        {!isHome && !isPodcast && !section && !isContact ? (
+        {!isHome && !isPodcast && !isFaq && !section && !isContact ? (
           <p className="mx-auto max-w-7xl px-6 py-16 sm:px-8 lg:px-12">
             Page not found.{' '}
             <a className="underline underline-offset-2" href="/">

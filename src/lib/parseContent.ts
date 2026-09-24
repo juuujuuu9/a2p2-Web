@@ -47,6 +47,19 @@ export type PodcastContent = {
   }
 }
 
+export type FaqItem = {
+  question: string
+  html: string
+}
+
+export type FaqContent = {
+  title: string
+  hero: string
+  heading: string
+  items: FaqItem[]
+  close: string
+}
+
 export type SiteContent = {
   siteTitle: string
   tagline: string
@@ -70,6 +83,7 @@ export type SiteContent = {
     items: string[]
   }
   podcast: PodcastContent
+  faq: FaqContent
   sections: SiteSection[]
   contact: {
     title: string
@@ -97,7 +111,33 @@ function asNumber(value: unknown, fallback = 0): number {
 function markdownToHtml(value: unknown): string {
   const source = asString(value)
   if (!source) return ''
-  return marked.parse(source, { async: false }) as string
+  const html = marked.parse(source, { async: false }) as string
+  return html.replace(
+    /<a href="(https?:\/\/[^"]*)"/gi,
+    '<a href="$1" target="_blank" rel="noreferrer"',
+  )
+}
+
+function parseFaqItems(value: unknown): FaqItem[] {
+  if (!Array.isArray(value)) return []
+  return value.flatMap((item) => {
+    if (!item || typeof item !== 'object') return []
+    const record = item as Record<string, unknown>
+    const question = asString(record.question)
+    if (!question) return []
+    return [{ question, html: markdownToHtml(record.answer) }]
+  })
+}
+
+function parseFaq(value: unknown): FaqContent {
+  const faq = value && typeof value === 'object' ? (value as Record<string, unknown>) : {}
+  return {
+    title: asString(faq.title, 'FAQ'),
+    hero: asString(faq.hero),
+    heading: asString(faq.heading),
+    items: parseFaqItems(faq.items),
+    close: markdownToHtml(faq.close),
+  }
 }
 
 function parseLabeledLink(value: unknown): NavItem {
@@ -256,6 +296,7 @@ export function parseSiteContent(raw: string): SiteContent {
       items: parseStringList(principles.items),
     },
     podcast: parsePodcast(frontmatter.podcast),
+    faq: parseFaq(frontmatter.faq),
     sections: parseSections(frontmatter.sections),
     contact: {
       title: asString(contact.title, 'Contact'),

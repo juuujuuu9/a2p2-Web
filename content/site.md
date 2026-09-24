@@ -8,6 +8,7 @@
 #   header     sticky nav, social icons, donate
 #   home       Who We Are, Our Mission, Our Principles
 #   podcast    /podcast show copy, Apple, Spotify, episode titles
+#   faq        /faq accordion. Each item is `question` plus markdown `answer`
 #   pages      every other route, under `sections`
 #   contact    /contact
 #   footer     the footer line
@@ -19,6 +20,7 @@
 # Adding something later
 #   A new sentence on a page that already exists: edit that region.
 #   A new simple page: add a `sections` item. The route is / plus `id`.
+#   A new FAQ row: append to `faq.items` (`question`, markdown `answer`).
 #   A new podcast episode: append to `podcast.episodes` (code, title, href).
 #   A new listen platform: append to `podcast.listen` (label, href).
 #   A new header icon: append to `social`. The label must be exactly
@@ -26,6 +28,7 @@
 #     a matching icon in src/components/Header.tsx (SocialGlyph).
 #   A page that needs its own layout (the podcast is the model): add a new
 #     top-level region and a component. Do not also list it under `sections`.
+#     `faq` is one of those. Do not also list it under `sections`.
 #   A Season 1 guest: append under `podcast.seasonOne.guests` (name, image,
 #     width, height from `npm run optimize:images`, optional role, bio).
 
@@ -153,56 +156,56 @@ podcast:
       - name: Bevin Campbell, Psy.D.
         role: Host
         image: /images/bevin-campbell.webp
-        width: 682
-        height: 1024
+        width: 344
+        height: 344
         bio: |
           Bevin Campbell, Psy.D., is host and executive producer of In Depth: Psychoanalysis in the Academy.
       - name: J. Christopher Muran, Ph.D.
         image: /images/christopher-muran.webp
-        width: 744
-        height: 1024
+        width: 722
+        height: 722
         bio: |
           J. Christopher Muran, Ph.D., is a professor and psychotherapy researcher whose work bridges psychoanalysis, process research, and pluralistic training.
       - name: Jonathan Shedler, Ph.D.
         image: /images/jonathan-shedler.webp
-        width: 702
-        height: 1024
+        width: 644
+        height: 644
         bio: |
           Jonathan Shedler, Ph.D., is a clinical psychologist and researcher known for work on psychodynamic psychotherapy, personality, and the research–practice divide in psychology.
       - name: Daniel José Gaztambide, Psy.D.
         image: /images/daniel-gaztambide.webp
-        width: 851
-        height: 1024
+        width: 719
+        height: 719
         bio: |
           Daniel José Gaztambide, Psy.D., is a psychoanalyst and scholar whose work connects psychoanalysis, social justice, and decolonial approaches to mental health.
       - name: Kimberlyn Leary, Ph.D.
         image: /images/kimberlyn-leary.webp
-        width: 1024
-        height: 1024
+        width: 908
+        height: 908
         bio: |
           Kimberlyn Leary, Ph.D., is a psychoanalyst and policy expert whose career spans clinical work, leadership, negotiation, and systemic change in health and equity.
       - name: Chris Hopwood, Ph.D.
         image: /images/chris-hopwood.webp
-        width: 934
-        height: 1024
+        width: 802
+        height: 802
         bio: |
           Chris Hopwood, Ph.D., integrates psychodynamic and interpersonal theory with quantitative personality research and assessment.
       - name: Paul Wachtel, Ph.D.
         image: /images/paul-wachtel.webp
-        width: 767
-        height: 1024
+        width: 765
+        height: 765
         bio: |
           Paul Wachtel, Ph.D., is a psychologist and author known for integrative and relational approaches that connect psychoanalysis with other therapeutic traditions.
       - name: Nancy McWilliams, Ph.D.
         image: /images/nancy-mcwilliams.webp
-        width: 1024
-        height: 1024
+        width: 771
+        height: 771
         bio: |
           Nancy McWilliams, Ph.D., ABPP, is Visiting Professor Emerita at Rutgers Graduate School of Applied and Professional Psychology and maintains a private practice in Lambertville, NJ. She has authored four textbooks on psychoanalytic diagnosis and psychodynamic treatment, co-edited the Psychodynamic Diagnostic Manual, and is a former president of the Society for Psychoanalysis and Psychoanalytic Psychology of the APA. Her books are in 20 languages and she has taught in 30 countries.
       - name: Leora Trub, Ph.D.
         image: /images/leora-trub.webp
-        width: 1024
-        height: 1024
+        width: 903
+        height: 903
         bio: |
           Leora Trub, Ph.D., is a psychologist, educator, and founding member of Academics for the Advancement of Psychodynamic Psychology (a²p²).
   gratitude:
@@ -213,10 +216,53 @@ podcast:
       href: "/get-involved"
 
 # ---------------------------------------------------------------------------
+# faq  (/faq)
+# `hero` is the centered lines above the list (one line per row).
+# `items` is the accordion. `question` is the closed row. `answer` and
+# `close` are markdown: paragraphs, lists, and links. An https link opens
+# in a new tab.
+# ---------------------------------------------------------------------------
+
+faq:
+  title: FAQ
+  hero: |
+    Psychodynamic Psychology.
+    What it is, What it isn't
+    FAQ
+  heading: Frequently Asked Questions about Psychodynamic Theory & Practice
+  items:
+    - question: Isn't psychoanalysis just Freudian theory — id, ego, superego, all of that?
+      answer: |
+        Answer forthcoming.
+    - question: What does contemporary psychodynamic therapy actually address?
+      answer: |
+        Answer forthcoming.
+    - question: How well-supported is psychodynamic therapy by empirical research — and why is there a perception that it isn't?
+      answer: |
+        Answer forthcoming.
+    - question: How does psychodynamic therapy differ from Cognitive Behavioral Therapy (CBT)?
+      answer: |
+        Answer forthcoming.
+    - question: Is psychodynamic therapy only for certain kinds of people?
+      answer: |
+        Answer forthcoming.
+    - question: Is a²p² focused exclusively on psychodynamic psychology?
+      answer: |
+        Answer forthcoming.
+    - question: Doesn't psychodynamic work have a troubling history — on gender, race, and sexuality?
+      answer: |
+        Answer forthcoming.
+    - question: Why does it matter whether psychodynamic thinking survives in academic training?
+      answer: |
+        Answer forthcoming.
+  close: |
+    a²p² is an active scholarly community. If you are a researcher, clinician, or trainee interested in contributing to the advancement of psychodynamic psychology, we welcome you to [get in touch](/get-involved).
+
+# ---------------------------------------------------------------------------
 # pages
 # One item per route. `id` is the path (`our-story` → /our-story).
 # `body` is markdown: paragraphs, lists, and links.
-# Do not add `podcast` or `contact` here. Those routes have their own regions.
+# Do not add `podcast`, `faq`, or `contact` here. Those routes have their own regions.
 # ---------------------------------------------------------------------------
 
 sections:
@@ -249,10 +295,6 @@ sections:
     body: |
       - Past event highlights
       - Upcoming events
-  - id: faq
-    title: FAQ
-    body: |
-      Frequently Asked Questions about Psychodynamic psychology, training, & practice
   - id: partnerships
     title: Partnerships
     body: |

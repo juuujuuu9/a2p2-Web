@@ -6,24 +6,9 @@ import { flowClass, useFlowReveal, useStaggerReveal } from '../lib/storyUnravel'
 const linkClass = 'hover:opacity-80'
 const listenLinkClass = 'underline underline-offset-2 hover:opacity-80'
 
-const guestDotCount = 9
-
-function GuestDots() {
-  return (
-    <span aria-hidden className="mx-auto mt-3 flex justify-center gap-[5px]">
-      {Array.from({ length: guestDotCount }, (_, index) => (
-        <span
-          key={index}
-          className="size-1 shrink-0 rounded-full bg-[#7199ab]"
-        />
-      ))}
-    </span>
-  )
-}
-
 function GuestPortrait({
   guest,
-  className = 'aspect-square w-full rounded-full object-cover object-top',
+  className = 'aspect-square w-full rounded-full object-cover object-center',
 }: {
   guest: PodcastGuest
   className?: string
@@ -99,7 +84,6 @@ function GuestBioPanel({
         <div className="guest-bio-scroll overflow-y-auto pb-10 pt-2 md:pb-12 md:pt-8">
           <div className="mx-auto w-52 sm:w-60 md:w-64">
             <GuestPortrait guest={guest} />
-            <GuestDots />
           </div>
           <h2 id={titleId} className="mt-6 text-center text-fg">
             {guest.name}
@@ -304,7 +288,6 @@ export function Podcast({
                   onClick={() => setActiveGuest(guest)}
                 >
                   <GuestPortrait guest={guest} />
-                  <GuestDots />
                   <p className="mt-2.5 font-sauce-bold text-[13px] leading-snug sm:text-base">
                     {guest.name}
                   </p>

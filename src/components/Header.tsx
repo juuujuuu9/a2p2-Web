@@ -12,6 +12,12 @@ export type HeaderProps = {
 
 const iconClass = 'h-5 w-5 fill-current'
 
+function isCurrent(href: string) {
+  const path = window.location.pathname.replace(/\/+$/, '') || '/'
+  const target = href.split('#')[0].replace(/\/+$/, '') || '/'
+  return target === path
+}
+
 function SocialGlyph({ label }: { label: string }) {
   switch (label.toLowerCase()) {
     case 'linkedin':
@@ -115,16 +121,20 @@ export function Header({ siteTitle, tagline, nav, social, donate }: HeaderProps)
         <div id="site-nav-links" className={open ? 'site-nav-panel is-open' : 'site-nav-panel'}>
           <div className="site-nav-panel-clip">
             <div className="mx-auto flex max-w-7xl flex-col gap-1 px-6 pb-3 sm:px-8 md:flex-row md:flex-wrap md:items-center md:gap-6 md:py-3.5 lg:px-12">
-              {nav.map((item) => (
-                <a
-                  key={item.href}
-                  href={item.href}
-                  className="py-2 text-fg md:py-0"
-                  onClick={() => setOpen(false)}
-                >
-                  {item.label}
-                </a>
-              ))}
+              {nav.map((item) => {
+                const current = isCurrent(item.href)
+                return (
+                  <a
+                    key={item.href}
+                    href={item.href}
+                    className={`py-2 md:py-0 ${current ? 'text-[#7199ab]' : 'text-fg'}`}
+                    aria-current={current ? 'page' : undefined}
+                    onClick={() => setOpen(false)}
+                  >
+                    {item.label}
+                  </a>
+                )
+              })}
               <div className="mt-2 flex items-center gap-4 py-2 md:hidden">
                 {social.map((item) => (
                   <a

@@ -20,11 +20,18 @@ export function isStoryInView(node: HTMLElement, minRatio = 0.25): boolean {
   return storyVisibleRatio(node.getBoundingClientRect()) >= minRatio
 }
 
-function revealVisibleFlows(root: HTMLElement): Record<string, boolean> {
+/** Any slice in the viewport. Tall blocks (Who We Are) fail the 25% test while their heading is already on screen. */
+export function isStoryOnScreen(node: HTMLElement): boolean {
+  const rect = node.getBoundingClientRect()
+  return rect.bottom > 0 && rect.top < window.innerHeight
+}
+
+function revealVisibleFlows(root: HTMLElement, onScreen = false): Record<string, boolean> {
   const found: Record<string, boolean> = {}
   for (const node of root.querySelectorAll<HTMLElement>('[data-flow]')) {
     const key = node.getAttribute('data-flow')
-    if (key && isStoryInView(node)) found[key] = true
+    const visible = onScreen ? isStoryOnScreen(node) : isStoryInView(node)
+    if (key && visible) found[key] = true
   }
   return found
 }
@@ -50,8 +57,8 @@ export function useFlowReveal(rootRef: RefObject<HTMLElement | null>) {
       return
     }
 
-    const mergeVisible = () => {
-      setFlows((prev) => ({ ...prev, ...revealVisibleFlows(root) }))
+    const mergeVisible = (afterIntro = false) => {
+      setFlows((prev) => ({ ...prev, ...revealVisibleFlows(root, afterIntro) }))
     }
 
     const io = new IntersectionObserver(
@@ -80,10 +87,11 @@ export function useFlowReveal(rootRef: RefObject<HTMLElement | null>) {
       io.observe(node)
     }
 
-    window.addEventListener('a2p2:intro-complete', mergeVisible)
+    const onIntroComplete = () => mergeVisible(true)
+    window.addEventListener('a2p2:intro-complete', onIntroComplete)
     return () => {
       io.disconnect()
-      window.removeEventListener('a2p2:intro-complete', mergeVisible)
+      window.removeEventListener('a2p2:intro-complete', onIntroComplete)
     }
   }, [rootRef])
 
@@ -131,12 +139,12 @@ export function useStaggerReveal(
       }
     }
 
-    const seedInView = () => {
+    const seedInView = (afterIntro = false) => {
       for (const item of items) {
         const index = Number(item.getAttribute(dataAttr))
-        if (!Number.isNaN(index) && isStoryInView(item, minRatio)) {
-          inView.add(index)
-        }
+        if (Number.isNaN(index)) continue
+        const visible = afterIntro ? isStoryOnScreen(item) : isStoryInView(item, minRatio)
+        if (visible) inView.add(index)
       }
       if (!timer) revealNext()
     }
@@ -159,7 +167,7 @@ export function useStaggerReveal(
     for (const item of items) io.observe(item)
 
     const onIntroComplete = () => {
-      seedInView()
+      seedInView(true)
     }
     window.addEventListener('a2p2:intro-complete', onIntroComplete)
 

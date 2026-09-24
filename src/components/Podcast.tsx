@@ -81,7 +81,10 @@ function GuestBioPanel({
             </button>
           </div>
         </div>
-        <div className="guest-bio-scroll overflow-y-auto pb-10 pt-2 md:pb-12 md:pt-8">
+        <div
+          className="guest-bio-scroll overflow-y-auto pb-10 pt-2 md:pb-12 md:pt-8"
+          data-lenis-prevent=""
+        >
           <div className="mx-auto w-52 sm:w-60 md:w-64">
             <GuestPortrait guest={guest} />
           </div>
@@ -94,7 +97,7 @@ function GuestBioPanel({
             </p>
           ) : null}
           {guest.bio ? (
-            <p className="font-dm-regular mt-8 text-[18pt] leading-[1.7] text-fg">
+            <p className="font-inter-regular mt-8 text-[18pt] leading-[1.7] text-fg">
               {guest.bio}
             </p>
           ) : null}
@@ -185,7 +188,7 @@ export function Podcast({
           className={`mx-auto max-w-7xl px-6 pb-10 sm:px-8 lg:px-12 ${flowClass(flowOn('about-body'))}`}
         >
           {description ? (
-            <p className="font-dm-regular pt-5 text-[18pt] leading-normal text-fg">
+            <p className="font-inter-regular pt-5 text-[18pt] leading-normal text-fg">
               {description}
             </p>
           ) : null}
@@ -246,14 +249,14 @@ export function Podcast({
               </span>
               {episode.href ? (
                 <a
-                  className="font-dm-bold text-[18pt] leading-snug hover:underline hover:opacity-80 underline-offset-2"
+                  className="font-inter-bold text-[18pt] leading-snug hover:underline hover:opacity-80 underline-offset-2"
                   href={episode.href}
                   {...newTabProps(episode.href)}
                 >
                   {episode.title}
                 </a>
               ) : (
-                <span className="font-dm-bold text-[18pt] leading-snug">
+                <span className="font-inter-bold text-[18pt] leading-snug">
                   {episode.title}
                 </span>
               )}
@@ -308,7 +311,7 @@ export function Podcast({
             data-flow="gratitude"
             className={`mx-auto max-w-[967px] px-6 pb-16 pt-24 text-center sm:px-8 sm:pb-20 sm:pt-28 lg:px-12 ${flowClass(flowOn('gratitude'))}`}
           >
-            <p className="font-dm-regular text-[18pt] leading-[1.7] italic">
+            <p className="font-inter-regular text-[18pt] leading-[1.7] italic">
               {gratitude.body}
             </p>
             {gratitude.cta.label && gratitude.cta.href ? (

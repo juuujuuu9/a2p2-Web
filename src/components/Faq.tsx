@@ -12,7 +12,7 @@ export function Faq({ hero, heading, items, close }: FaqContent) {
   const revealed = useStaggerReveal(listRef, items.length, 'data-faq')
 
   return (
-    <div ref={pageRef}>
+    <div ref={pageRef} className="faq-page">
       <div data-flow="hero" className={`relative ${flowClass(flowOn('hero'))}`}>
         <img
           src={FAQ_HERO.src}
@@ -25,7 +25,7 @@ export function Faq({ hero, heading, items, close }: FaqContent) {
         />
         {hero ? (
           <div className="absolute inset-0 flex items-center justify-center bg-bg/20 px-6">
-            <p className="font-sauce-regular text-center text-xl leading-snug whitespace-pre-line text-white sm:text-2xl">
+            <p className="text-center text-xl leading-snug whitespace-pre-line text-white sm:text-2xl">
               {hero}
             </p>
           </div>
@@ -35,7 +35,7 @@ export function Faq({ hero, heading, items, close }: FaqContent) {
         <div className="mx-auto max-w-7xl px-6 pt-14 sm:px-8 sm:pt-16 lg:px-12">
           <h1
             data-flow="heading"
-            className={`font-sauce-bold pb-4 text-xl tracking-tight text-fg sm:text-2xl ${flowClass(flowOn('heading'))}`}
+            className={`pb-4 text-xl tracking-tight text-fg sm:text-2xl ${flowClass(flowOn('heading'))}`}
           >
             {heading}
           </h1>
@@ -58,7 +58,7 @@ export function Faq({ hero, heading, items, close }: FaqContent) {
                 <h2 className="text-[18pt] leading-snug font-normal tracking-normal">
                   <button
                     type="button"
-                    className="font-dm-regular w-full cursor-pointer py-4 text-left text-[18pt] leading-snug font-normal text-[#7199ab] hover:opacity-80 sm:py-5"
+                    className="w-full cursor-pointer py-4 text-left text-[18pt] leading-snug font-normal text-[#7199ab] hover:opacity-80 sm:py-5"
                     aria-expanded={expanded}
                     aria-controls={panelId}
                     onClick={() => setOpen((current) => (current === index ? null : index))}
@@ -77,7 +77,7 @@ export function Faq({ hero, heading, items, close }: FaqContent) {
                         id={panelId}
                         role="region"
                         aria-hidden={expanded ? undefined : true}
-                        className="prose-site font-dm-regular pb-5 text-[18pt] leading-[1.7] text-fg"
+                        className="prose-site pb-5 text-[18pt] leading-[1.7] text-fg"
                         dangerouslySetInnerHTML={{ __html: item.html }}
                       />
                     </div>
@@ -93,7 +93,7 @@ export function Faq({ hero, heading, items, close }: FaqContent) {
             className={`mx-auto max-w-7xl px-6 py-14 sm:px-8 sm:py-16 lg:px-12 ${flowClass(flowOn('close'))}`}
           >
             <div
-              className="font-dm-regular max-w-5xl text-[18pt] leading-[1.7] text-fg italic [&_a]:underline [&_a]:underline-offset-2"
+              className="max-w-5xl text-[18pt] leading-[1.7] text-fg italic [&_a]:underline [&_a]:underline-offset-2"
               dangerouslySetInnerHTML={{ __html: close }}
             />
           </div>

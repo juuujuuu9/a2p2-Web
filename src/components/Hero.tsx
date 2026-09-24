@@ -15,7 +15,7 @@ type HeroProps = {
 }
 
 const copyClass =
-  'font-dm-regular max-w-5xl text-[18pt] leading-[1.7] text-fg'
+  'font-inter-regular max-w-5xl text-[18pt] leading-[1.7] text-fg'
 
 export function Hero({
   title,
@@ -110,7 +110,7 @@ export function Hero({
                           aria-hidden
                           className="absolute top-0 left-1/2 h-px w-screen -translate-x-1/2 bg-fg/20"
                         />
-                        <span className="font-dm-bold w-12 shrink-0 text-[33.2px] leading-none text-[#7199ab]">
+                        <span className="font-inter-bold w-12 shrink-0 text-[33.2px] leading-none text-[#7199ab]">
                           {String(index + 1).padStart(2, '0')}
                         </span>
                         <p className={copyClass}>{item}</p>

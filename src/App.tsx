@@ -8,6 +8,7 @@ import { IntroOverlay } from './components/IntroOverlay'
 import { Faq } from './components/Faq'
 import { Podcast } from './components/Podcast'
 import { parseSiteContent } from './lib/parseContent'
+import { useDesktopSmoothScroll } from './lib/smoothScroll'
 
 const site = parseSiteContent(siteMarkdown)
 
@@ -16,6 +17,7 @@ function currentPath() {
 }
 
 function App() {
+  useDesktopSmoothScroll()
   const path = currentPath()
   const isHome = path === '/'
   const isPodcast = path === '/podcast'

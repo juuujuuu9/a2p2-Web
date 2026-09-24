@@ -110,6 +110,7 @@ principles:
 # `seasonOne.guests`: grid headshots; click opens the bio panel (desktop:
 # slides in from the right). `image` is the public path (/images/….webp).
 # `width` and `height` must match the optimizer output on the `<img>`.
+# `gratitude`: italic thank-you band below Season 1 (`body`, `cta` label + href).
 # ---------------------------------------------------------------------------
 
 podcast:
@@ -204,6 +205,12 @@ podcast:
         height: 1024
         bio: |
           Leora Trub, Ph.D., is a psychologist, educator, and founding member of Academics for the Advancement of Psychodynamic Psychology (a²p²).
+  gratitude:
+    body: |
+      We are deeply grateful to the members of the Div39 McCary Fund for supporting our work through a generous $10,000, which has contributed to much of our work thus far.
+    cta:
+      label: Donate
+      href: "/get-involved"
 
 # ---------------------------------------------------------------------------
 # pages

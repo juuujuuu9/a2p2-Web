@@ -48,6 +48,7 @@ export function IntroOverlay() {
       onAnimationEnd={(event) => {
         if (event.animationName === 'intro-overlay-out') {
           setVisible(false)
+          window.dispatchEvent(new CustomEvent('a2p2:intro-complete'))
         }
       }}
     >

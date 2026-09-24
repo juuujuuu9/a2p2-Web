@@ -1,11 +1,25 @@
-import { useEffect, useId, useState } from 'react'
+import { useEffect, useId, useRef, useState } from 'react'
 import { PODCAST_MARK } from '../lib/media'
 import { newTabProps, type PodcastContent, type PodcastGuest } from '../lib/parseContent'
+import { flowClass, useFlowReveal, useStaggerReveal } from '../lib/storyUnravel'
 
 const linkClass = 'hover:opacity-80'
+const listenLinkClass = 'underline underline-offset-2 hover:opacity-80'
 
-const guestDots =
-  'mx-auto mt-3 block h-2 w-1/2 bg-[radial-gradient(circle,#7199ab_2px,transparent_2.15px)] bg-size-[9px_8px] bg-center bg-repeat-x'
+const guestDotCount = 9
+
+function GuestDots() {
+  return (
+    <span aria-hidden className="mx-auto mt-3 flex justify-center gap-[5px]">
+      {Array.from({ length: guestDotCount }, (_, index) => (
+        <span
+          key={index}
+          className="size-1 shrink-0 rounded-full bg-[#7199ab]"
+        />
+      ))}
+    </span>
+  )
+}
 
 function GuestPortrait({
   guest,
@@ -42,7 +56,7 @@ function GuestBioPanel({
     <>
       <button
         type="button"
-        className="fixed inset-0 z-40 bg-bg/70 md:bg-black/40"
+        className="fixed inset-0 z-40 bg-bg/85 md:bg-black/60"
         aria-label="Close bio"
         onClick={onClose}
       />
@@ -50,13 +64,13 @@ function GuestBioPanel({
         role="dialog"
         aria-modal="true"
         aria-labelledby={titleId}
-        className={`fixed inset-x-0 bottom-0 z-50 flex max-h-[90dvh] flex-col rounded-t-2xl border-t border-fg/20 bg-bg px-6 text-fg shadow-xl sm:px-8 md:inset-x-auto md:inset-y-0 md:right-0 md:max-h-none md:w-full md:max-w-md md:rounded-none md:border-t-0 md:border-l md:px-10 ${
+        className={`fixed inset-x-0 bottom-0 z-50 flex max-h-[90dvh] flex-col rounded-t-2xl border-t border-fg/20 bg-bg px-6 text-fg shadow-xl sm:px-8 md:inset-x-auto md:inset-y-0 md:right-0 md:max-h-none md:w-full md:max-w-2xl md:rounded-none md:border-t-0 md:border-l md:px-12 ${
           motion
             ? 'animate-[guest-sheet-up_0.35s_ease-out] md:animate-[guest-panel-in_0.35s_ease-out]'
             : ''
         }`}
       >
-        <div className="shrink-0 pt-3 md:pt-6">
+        <div className="shrink-0 pt-3 md:pb-6 md:pt-6">
           <div
             aria-hidden
             className="mx-auto mb-3 h-1 w-10 rounded-full bg-fg/25 md:hidden"
@@ -82,10 +96,10 @@ function GuestBioPanel({
             </button>
           </div>
         </div>
-        <div className="overflow-y-auto pb-10 pt-2 md:pb-12 md:pt-4">
-          <div className="mx-auto w-48 sm:w-56">
+        <div className="guest-bio-scroll overflow-y-auto pb-10 pt-2 md:pb-12 md:pt-8">
+          <div className="mx-auto w-52 sm:w-60 md:w-64">
             <GuestPortrait guest={guest} />
-            <span aria-hidden className={guestDots} />
+            <GuestDots />
           </div>
           <h2 id={titleId} className="mt-6 text-center text-fg">
             {guest.name}
@@ -114,9 +128,24 @@ export function Podcast({
   listen,
   episodes,
   seasonOne,
+  gratitude,
 }: PodcastContent) {
   const [activeGuest, setActiveGuest] = useState<PodcastGuest | null>(null)
   const titleId = useId()
+  const pageRef = useRef<HTMLDivElement>(null)
+  const episodesListRef = useRef<HTMLUListElement>(null)
+  const guestsListRef = useRef<HTMLUListElement>(null)
+  const flowOn = useFlowReveal(pageRef)
+  const episodesRevealed = useStaggerReveal(
+    episodesListRef,
+    episodes.length,
+    'data-episode',
+  )
+  const guestsRevealed = useStaggerReveal(
+    guestsListRef,
+    seasonOne.guests.length,
+    'data-guest',
+  )
   const motion =
     typeof window !== 'undefined' &&
     !window.matchMedia('(prefers-reduced-motion: reduce)').matches
@@ -137,14 +166,18 @@ export function Podcast({
 
   return (
     <>
+      <div ref={pageRef}>
       <section className="bg-bg">
-        <div className="mx-auto max-w-7xl px-6 pt-10 sm:px-8 sm:pt-14 lg:px-12">
+        <div
+          data-flow="intro"
+          className={`mx-auto max-w-7xl px-6 pt-14 sm:px-8 sm:pt-18 lg:px-12 lg:pt-20 ${flowClass(flowOn('intro'))}`}
+        >
           <img
             src={PODCAST_MARK.src}
             width={PODCAST_MARK.width}
             height={PODCAST_MARK.height}
             alt="Academics for the Advancement of Psychodynamic Psychology"
-            className="mx-auto h-auto w-36 sm:w-52 md:w-64"
+            className="mx-auto h-auto w-full max-w-[350px]"
             fetchPriority="high"
             decoding="sync"
           />
@@ -155,12 +188,18 @@ export function Podcast({
           ) : null}
         </div>
         <div className="mx-auto mt-10 max-w-7xl px-6 sm:mt-12 sm:px-8 lg:px-12">
-          <h1 className="font-sauce-bold pb-4 text-xl tracking-tight text-fg sm:text-2xl">
+          <h1
+            data-flow="about"
+            className={`font-sauce-bold pb-4 text-xl tracking-tight text-fg sm:text-2xl ${flowClass(flowOn('about'))}`}
+          >
             {title}
           </h1>
         </div>
         <hr className="border-0 border-t border-fg/20" />
-        <div className="mx-auto max-w-7xl px-6 pb-10 sm:px-8 lg:px-12">
+        <div
+          data-flow="about-body"
+          className={`mx-auto max-w-7xl px-6 pb-10 sm:px-8 lg:px-12 ${flowClass(flowOn('about-body'))}`}
+        >
           {description ? (
             <p className="font-dm-regular pt-5 text-[18pt] leading-normal text-fg">
               {description}
@@ -174,7 +213,11 @@ export function Podcast({
                 {listen.map((item, index) => (
                   <span key={item.href}>
                     {index > 0 ? <span aria-hidden="true"> | </span> : null}
-                    <a className={linkClass} href={item.href} {...newTabProps(item.href)}>
+                    <a
+                      className={listenLinkClass}
+                      href={item.href}
+                      {...newTabProps(item.href)}
+                    >
                       {item.label}
                     </a>
                   </span>
@@ -192,27 +235,34 @@ export function Podcast({
       </section>
       <section id="episodes" className="scroll-mt-8 bg-white text-bg">
         <div className="mx-auto max-w-7xl px-6 pt-16 sm:px-8 lg:px-12">
-          <h2 className="font-sauce-bold pb-4 text-xl tracking-tight sm:text-2xl">
+          <h2
+            data-flow="episodes-heading"
+            className={`font-sauce-bold pb-4 text-xl tracking-tight sm:text-2xl ${flowClass(flowOn('episodes-heading'))}`}
+          >
             Episodes
           </h2>
         </div>
         <hr className="border-0 border-t border-bg/20" />
-        <ul className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-12">
-          {episodes.map((episode) => (
+        <ul
+          ref={episodesListRef}
+          className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-12"
+        >
+          {episodes.map((episode, index) => (
             <li
               key={episode.code}
-              className="relative flex items-center gap-4 py-4 sm:gap-8 sm:py-5"
+              data-episode={index}
+              className={`relative flex flex-col items-start gap-1 py-4 sm:flex-row sm:items-center sm:gap-8 sm:py-5 ${flowClass(episodesRevealed[index])}`}
             >
               <span
                 aria-hidden
                 className="absolute bottom-0 left-1/2 h-px w-screen -translate-x-1/2 bg-bg/20"
               />
-              <span className="font-sauce-bold shrink-0 whitespace-nowrap text-[24pt] leading-none tracking-tighter text-[#7199ab]">
+              <span className="font-sauce-bold shrink-0 whitespace-nowrap text-[18pt] leading-none tracking-tighter text-[#7199ab] sm:text-[24pt]">
                 {episode.code}
               </span>
               {episode.href ? (
                 <a
-                  className="font-dm-bold text-[18pt] leading-snug hover:opacity-80"
+                  className="font-dm-bold text-[18pt] leading-snug hover:underline hover:opacity-80 underline-offset-2"
                   href={episode.href}
                   {...newTabProps(episode.href)}
                 >
@@ -232,13 +282,21 @@ export function Podcast({
         <div className="mx-auto max-w-5xl px-6 py-16 sm:px-8 sm:py-20 lg:px-12">
           <h2
             id="season-1"
-            className="font-sauce-bold text-center text-2xl tracking-tight sm:text-3xl"
+            data-flow="season-heading"
+            className={`font-sauce-bold text-center text-2xl tracking-tight sm:text-3xl ${flowClass(flowOn('season-heading'))}`}
           >
             {seasonOne.title}
           </h2>
-          <ul className="mt-12 grid grid-cols-3 gap-x-4 gap-y-10 sm:mt-14 sm:gap-x-8 sm:gap-y-14">
-            {seasonOne.guests.map((guest) => (
-              <li key={guest.image}>
+          <ul
+            ref={guestsListRef}
+            className="mt-12 grid grid-cols-2 gap-x-4 gap-y-10 sm:mt-14 sm:grid-cols-3 sm:gap-x-8 sm:gap-y-14"
+          >
+            {seasonOne.guests.map((guest, index) => (
+              <li
+                key={guest.image}
+                data-guest={index}
+                className={flowClass(guestsRevealed[index])}
+              >
                 <button
                   type="button"
                   className="w-full cursor-pointer text-center hover:opacity-90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-fg/50"
@@ -246,7 +304,7 @@ export function Podcast({
                   onClick={() => setActiveGuest(guest)}
                 >
                   <GuestPortrait guest={guest} />
-                  <span aria-hidden className={guestDots} />
+                  <GuestDots />
                   <p className="mt-2.5 font-sauce-bold text-[13px] leading-snug sm:text-base">
                     {guest.name}
                   </p>
@@ -261,6 +319,28 @@ export function Podcast({
           </ul>
         </div>
       </section>
+      {gratitude.body ? (
+        <section className="border-t border-fg/20 bg-bg text-fg">
+          <div
+            data-flow="gratitude"
+            className={`mx-auto max-w-[967px] px-6 pb-16 pt-24 text-center sm:px-8 sm:pb-20 sm:pt-28 lg:px-12 ${flowClass(flowOn('gratitude'))}`}
+          >
+            <p className="font-dm-regular text-[18pt] leading-[1.7] italic">
+              {gratitude.body}
+            </p>
+            {gratitude.cta.label && gratitude.cta.href ? (
+              <a
+                href={gratitude.cta.href}
+                className="mt-10 inline-block border border-fg px-3.5 py-1.5 font-sauce-regular text-[17px] text-fg hover:opacity-90"
+                {...newTabProps(gratitude.cta.href)}
+              >
+                {gratitude.cta.label}
+              </a>
+            ) : null}
+          </div>
+        </section>
+      ) : null}
+      </div>
       {activeGuest ? (
         <GuestBioPanel
           guest={activeGuest}

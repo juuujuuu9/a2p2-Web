@@ -41,6 +41,10 @@ export type PodcastContent = {
   listen: NavItem[]
   episodes: PodcastEpisode[]
   seasonOne: PodcastSeason
+  gratitude: {
+    body: string
+    cta: NavItem
+  }
 }
 
 export type SiteContent = {
@@ -174,6 +178,10 @@ function parseSeason(value: unknown, fallbackTitle: string): PodcastSeason {
 function parsePodcast(value: unknown): PodcastContent {
   const podcast =
     value && typeof value === 'object' ? (value as Record<string, unknown>) : {}
+  const gratitude =
+    podcast.gratitude && typeof podcast.gratitude === 'object'
+      ? (podcast.gratitude as Record<string, unknown>)
+      : {}
   return {
     title: asString(podcast.title, 'In-Depth Podcast'),
     welcome: asString(podcast.welcome),
@@ -182,6 +190,10 @@ function parsePodcast(value: unknown): PodcastContent {
     listen: parseNav(podcast.listen),
     episodes: parseEpisodes(podcast.episodes),
     seasonOne: parseSeason(podcast.seasonOne, 'Season 1'),
+    gratitude: {
+      body: asString(gratitude.body),
+      cta: parseLabeledLink(gratitude.cta),
+    },
   }
 }
 

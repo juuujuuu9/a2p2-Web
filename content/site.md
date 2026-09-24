@@ -22,6 +22,7 @@
 #   A new simple page: add a `sections` item. The route is / plus `id`.
 #   A new FAQ row: append to `faq.items` (`question`, markdown `answer`).
 #   A new podcast episode: append to `podcast.episodes` (code, title, href).
+#     Wrap the lead phrase in ** so only that part is bold.
 #   A new listen platform: append to `podcast.listen` (label, href).
 #   A new header icon: append to `social`. The label must be exactly
 #     LinkedIn, Facebook, Instagram, X, or YouTube. Any other label needs
@@ -110,6 +111,9 @@ principles:
 # `episodes` is the list under Episodes. `code` is the colored label
 # (S1 E1). `title` is the link text. `href` is the episode page.
 # Omit href to show the title as plain text.
+# Bold only the lead phrase: wrap it in **. The rest of the title stays
+# regular. Cut at the colon or " — ". If the title has neither, cut before
+# " with " so the guest credit stays regular.
 # `seasonOne.guests`: grid headshots; click opens the bio panel (desktop:
 # slides in from the right). `image` is the public path (/images/….webp).
 # `width` and `height` must match the optimizer output on the `<img>`.
@@ -130,25 +134,25 @@ podcast:
       href: "https://open.spotify.com/show/033n01DWo8bh8Ie2S8XuyW"
   episodes:
     - code: S1 E1
-      title: Revitalizing Psychodynamic Thinking in Academia — Insights from Nancy McWilliams and Leora Trub
+      title: "**Revitalizing Psychodynamic Thinking in Academia** — Insights from Nancy McWilliams and Leora Trub"
       href: "https://podcasts.apple.com/us/podcast/revitalizing-psychodynamic-thinking-in-academia-insights/id1896817346?i=1000769677811"
     - code: S1 E2
-      title: "Decolonizing Psychoanalysis: Social Justice and Therapy with Dr. Daniel José Gaztambide"
+      title: "**Decolonizing Psychoanalysis**: Social Justice and Therapy with Dr. Daniel José Gaztambide"
       href: "https://podcasts.apple.com/us/podcast/decolonizing-psychoanalysis-social-justice-and/id1896817346?i=1000770978153"
     - code: S1 E3
-      title: "Bridging Traditions: The Power of Pluralism in Psychotherapy with Dr. Chris Muran"
+      title: "**Bridging Traditions**: The Power of Pluralism in Psychotherapy with Dr. Chris Muran"
       href: "https://podcasts.apple.com/us/podcast/bridging-traditions-the-power-of-pluralism/id1896817346?i=1000772041363"
     - code: S1 E4
-      title: "From Psychoanalysis to Policy: A Journey of Systemic Change with Dr. Kimberlyn Leary"
+      title: "**From Psychoanalysis to Policy**: A Journey of Systemic Change with Dr. Kimberlyn Leary"
       href: "https://podcasts.apple.com/us/podcast/from-psychoanalysis-to-policy-a-journey-of/id1896817346?i=1000773127051"
     - code: S1 E5
-      title: Integrating Psychoanalysis and Quantitative Research in Psychology with Dr. Chris Hopwood
+      title: "**Integrating Psychoanalysis and Quantitative Research in Psychology** with Dr. Chris Hopwood"
       href: "https://podcasts.apple.com/us/podcast/integrating-psychoanalysis-and-quantitative-research/id1896817346?i=1000774043615"
     - code: S1 E6
-      title: "The Future of Psychoanalysis in Academia: Insights from Dr. Paul Wachtel"
+      title: "**The Future of Psychoanalysis in Academia**: Insights from Dr. Paul Wachtel"
       href: "https://podcasts.apple.com/us/podcast/the-future-of-psychoanalysis-in-academia-insights/id1896817346?i=1000775017359"
     - code: S1 E7
-      title: "Bridging the Gap: How Research and Practice Diverge in Psychology with Dr. Jonathan Shedler"
+      title: "**Bridging the Gap**: How Research and Practice Diverge in Psychology with Dr. Jonathan Shedler"
       href: "https://podcasts.apple.com/us/podcast/bridging-the-gap-how-research-and-practice-diverge/id1896817346?i=1000775967201"
   seasonOne:
     title: Season 1

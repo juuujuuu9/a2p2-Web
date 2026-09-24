@@ -6,6 +6,23 @@ import { flowClass, useFlowReveal, useStaggerReveal } from '../lib/storyUnravel'
 const linkClass = 'hover:opacity-80'
 const listenLinkClass = 'underline underline-offset-2 hover:opacity-80'
 
+/** `**lead** rest` in content/site.md. Unmarked titles stay regular. */
+function episodeTitleParts(title: string): { lead: string; rest: string } {
+  const marked = title.match(/^\*\*(.+?)\*\*(.*)$/)
+  if (marked) return { lead: marked[1], rest: marked[2] }
+  return { lead: '', rest: title }
+}
+
+function EpisodeTitle({ title }: { title: string }) {
+  const { lead, rest } = episodeTitleParts(title)
+  return (
+    <>
+      {lead ? <span className="font-inter-bold">{lead}</span> : null}
+      {rest ? <span className="font-inter-regular">{rest}</span> : null}
+    </>
+  )
+}
+
 function GuestPortrait({
   guest,
   className = 'aspect-square w-full rounded-full object-cover object-center',
@@ -249,15 +266,15 @@ export function Podcast({
               </span>
               {episode.href ? (
                 <a
-                  className="font-inter-bold text-[18pt] leading-snug hover:underline hover:opacity-80 underline-offset-2"
+                  className="text-[18pt] leading-snug hover:underline hover:opacity-80 underline-offset-2"
                   href={episode.href}
                   {...newTabProps(episode.href)}
                 >
-                  {episode.title}
+                  <EpisodeTitle title={episode.title} />
                 </a>
               ) : (
-                <span className="font-inter-bold text-[18pt] leading-snug">
-                  {episode.title}
+                <span className="text-[18pt] leading-snug">
+                  <EpisodeTitle title={episode.title} />
                 </span>
               )}
             </li>

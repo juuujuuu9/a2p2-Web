@@ -188,9 +188,48 @@ h6 {
   animation: story-unravel 1.8s ease-out both;
 }
 
+/* Mobile nav grows open. 0fr/1fr animates height without a fixed max-height. */
+.site-nav-panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 320ms ease;
+}
+
+.site-nav-panel.is-open {
+  grid-template-rows: 1fr;
+}
+
+.site-nav-panel-clip {
+  overflow: hidden;
+}
+
+@media (max-width: 767px) {
+  .site-nav-panel:not(.is-open) .site-nav-panel-clip {
+    visibility: hidden;
+    transition: visibility 0s linear 320ms;
+  }
+}
+
+@media (min-width: 768px) {
+  .site-nav-panel,
+  .site-nav-panel.is-open {
+    grid-template-rows: 1fr;
+    transition: none;
+  }
+
+  .site-nav-panel-clip {
+    overflow: visible;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .story-unravel {
     animation: none;
+  }
+
+  .site-nav-panel,
+  .site-nav-panel:not(.is-open) .site-nav-panel-clip {
+    transition: none;
   }
 }
 

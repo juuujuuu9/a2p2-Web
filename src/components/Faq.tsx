@@ -1,14 +1,19 @@
-import { useId, useState } from 'react'
+import { useId, useRef, useState } from 'react'
 import { FAQ_HERO } from '../lib/media'
 import type { FaqContent } from '../lib/parseContent'
+import { flowClass, useFlowReveal, useStaggerReveal } from '../lib/storyUnravel'
 
 export function Faq({ hero, heading, items, close }: FaqContent) {
   const [open, setOpen] = useState<number | null>(null)
   const baseId = useId()
+  const pageRef = useRef<HTMLDivElement>(null)
+  const listRef = useRef<HTMLUListElement>(null)
+  const flowOn = useFlowReveal(pageRef)
+  const revealed = useStaggerReveal(listRef, items.length, 'data-faq')
 
   return (
-    <>
-      <div className="relative">
+    <div ref={pageRef}>
+      <div data-flow="hero" className={`relative ${flowClass(flowOn('hero'))}`}>
         <img
           src={FAQ_HERO.src}
           width={FAQ_HERO.width}
@@ -28,17 +33,24 @@ export function Faq({ hero, heading, items, close }: FaqContent) {
       </div>
       <section className="bg-bg">
         <div className="mx-auto max-w-7xl px-6 pt-14 sm:px-8 sm:pt-16 lg:px-12">
-          <h1 className="font-sauce-bold pb-4 text-xl tracking-tight text-fg sm:text-2xl">
+          <h1
+            data-flow="heading"
+            className={`font-sauce-bold pb-4 text-xl tracking-tight text-fg sm:text-2xl ${flowClass(flowOn('heading'))}`}
+          >
             {heading}
           </h1>
         </div>
         <hr className="border-0 border-t border-fg/20" />
-        <ul className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-12">
+        <ul ref={listRef} className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-12">
           {items.map((item, index) => {
             const expanded = open === index
             const panelId = `${baseId}-${index}`
             return (
-              <li key={item.question} className="relative">
+              <li
+                key={item.question}
+                data-faq={index}
+                className={`relative ${flowClass(revealed[index])}`}
+              >
                 <span
                   aria-hidden
                   className="absolute bottom-0 left-1/2 h-px w-screen -translate-x-1/2 bg-fg/20"
@@ -76,7 +88,10 @@ export function Faq({ hero, heading, items, close }: FaqContent) {
           })}
         </ul>
         {close ? (
-          <div className="mx-auto max-w-7xl px-6 py-14 sm:px-8 sm:py-16 lg:px-12">
+          <div
+            data-flow="close"
+            className={`mx-auto max-w-7xl px-6 py-14 sm:px-8 sm:py-16 lg:px-12 ${flowClass(flowOn('close'))}`}
+          >
             <div
               className="font-dm-regular max-w-5xl text-[18pt] leading-[1.7] text-fg italic [&_a]:underline [&_a]:underline-offset-2"
               dangerouslySetInnerHTML={{ __html: close }}
@@ -84,6 +99,6 @@ export function Faq({ hero, heading, items, close }: FaqContent) {
           </div>
         ) : null}
       </section>
-    </>
+    </div>
   )
 }

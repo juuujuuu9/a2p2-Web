@@ -160,56 +160,56 @@ podcast:
       - name: Bevin Campbell, Psy.D.
         role: Host
         image: /images/bevin-campbell.webp
-        width: 344
-        height: 344
+        width: 576
+        height: 576
         bio: |
           Bevin Campbell, Psy.D., is host and executive producer of In Depth: Psychoanalysis in the Academy.
       - name: J. Christopher Muran, Ph.D.
         image: /images/christopher-muran.webp
-        width: 722
-        height: 722
+        width: 576
+        height: 576
         bio: |
           J. Christopher Muran, Ph.D., is a professor and psychotherapy researcher whose work bridges psychoanalysis, process research, and pluralistic training.
       - name: Jonathan Shedler, Ph.D.
         image: /images/jonathan-shedler.webp
-        width: 644
-        height: 644
+        width: 576
+        height: 575
         bio: |
           Jonathan Shedler, Ph.D., is a clinical psychologist and researcher known for work on psychodynamic psychotherapy, personality, and the research–practice divide in psychology.
       - name: Daniel José Gaztambide, Psy.D.
         image: /images/daniel-gaztambide.webp
-        width: 719
-        height: 719
+        width: 575
+        height: 576
         bio: |
           Daniel José Gaztambide, Psy.D., is a psychoanalyst and scholar whose work connects psychoanalysis, social justice, and decolonial approaches to mental health.
       - name: Kimberlyn Leary, Ph.D.
         image: /images/kimberlyn-leary.webp
-        width: 908
-        height: 908
+        width: 576
+        height: 576
         bio: |
           Kimberlyn Leary, Ph.D., is a psychoanalyst and policy expert whose career spans clinical work, leadership, negotiation, and systemic change in health and equity.
       - name: Chris Hopwood, Ph.D.
         image: /images/chris-hopwood.webp
-        width: 802
-        height: 802
+        width: 576
+        height: 576
         bio: |
           Chris Hopwood, Ph.D., integrates psychodynamic and interpersonal theory with quantitative personality research and assessment.
       - name: Paul Wachtel, Ph.D.
         image: /images/paul-wachtel.webp
-        width: 765
-        height: 765
+        width: 576
+        height: 576
         bio: |
           Paul Wachtel, Ph.D., is a psychologist and author known for integrative and relational approaches that connect psychoanalysis with other therapeutic traditions.
       - name: Nancy McWilliams, Ph.D.
         image: /images/nancy-mcwilliams.webp
-        width: 771
-        height: 771
+        width: 576
+        height: 576
         bio: |
           Nancy McWilliams, Ph.D., ABPP, is Visiting Professor Emerita at Rutgers Graduate School of Applied and Professional Psychology and maintains a private practice in Lambertville, NJ. She has authored four textbooks on psychoanalytic diagnosis and psychodynamic treatment, co-edited the Psychodynamic Diagnostic Manual, and is a former president of the Society for Psychoanalysis and Psychoanalytic Psychology of the APA. Her books are in 20 languages and she has taught in 30 countries.
       - name: Leora Trub, Ph.D.
         image: /images/leora-trub.webp
-        width: 903
-        height: 903
+        width: 576
+        height: 576
         bio: |
           Leora Trub, Ph.D., is a psychologist, educator, and founding member of Academics for the Advancement of Psychodynamic Psychology (a²p²).
   gratitude:

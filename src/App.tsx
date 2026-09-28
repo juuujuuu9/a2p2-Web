@@ -37,7 +37,7 @@ function App() {
   }, [isContact, isFaq, isPodcast, section])
 
   return (
-    <div className="font-sauce-regular min-h-svh bg-bg text-fg">
+    <div className="min-h-svh bg-bg text-fg">
       {isHome ? <IntroOverlay /> : null}
       <Header
         siteTitle={site.siteTitle}

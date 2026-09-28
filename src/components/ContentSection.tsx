@@ -16,7 +16,7 @@ export function ContentSection({
   return (
     <section id={id} className="border-t border-fg/20">
       <div className="mx-auto max-w-7xl px-6 py-14 sm:px-8 sm:py-16 lg:px-12">
-        <h1 className="font-sauce-regular mb-5 text-2xl tracking-tight text-fg sm:text-3xl">
+        <h1 className="mb-5 text-2xl tracking-tight text-fg sm:text-3xl">
           {title}
         </h1>
         {html ? (

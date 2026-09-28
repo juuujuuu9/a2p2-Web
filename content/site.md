@@ -221,7 +221,7 @@ podcast:
 
 # ---------------------------------------------------------------------------
 # faq  (/faq)
-# `hero` is the centered lines above the list (one line per row).
+# `hero` is the bold title centered on the office photo (one line per row).
 # `items` is the accordion. `question` is the closed row. `answer` and
 # `close` are markdown: paragraphs, lists, and links. An https link opens
 # in a new tab.
@@ -230,35 +230,52 @@ podcast:
 faq:
   title: FAQ
   hero: |
-    Psychodynamic Psychology.
+    Psychodynamic Psychology:
     What it is, What it isn't
-    FAQ
   heading: Frequently Asked Questions about Psychodynamic Theory & Practice
   items:
-    - question: Isn't psychoanalysis just Freudian theory — id, ego, superego, all of that?
+    - question: Is psychodynamic psychology still defined by Freudian theory — id, ego, superego, etc.?
       answer: |
-        Answer forthcoming.
+        Freud laid the foundations for psychoanalytic thought, but the field has evolved enormously since his time. While concepts such as the id, ego, superego, and Oedipus complex remain part of its history — and, for some practitioners, its vocabulary — they represent one early theoretical framework rather than the defining features of contemporary psychodynamic thought.
+
+        Over more than a century, psychoanalytic and psychodynamic thinking has developed in many directions through the work of figures such as Klein, Winnicott, Bowlby, and Kohut, as well as generations of attachment, relational, and intersubjective theorists who challenged, revised, and expanded earlier ideas. Contemporary psychodynamic approaches draw from this broad and continually evolving tradition, with particular attention to unconscious processes, emotional experience, relationships, development, and recurring patterns in how people experience themselves and others.
+
+        The development of psychoanalytic thought did not end with Freud any more than the development of physics ended with Newton.
     - question: What does contemporary psychodynamic therapy actually address?
       answer: |
-        Answer forthcoming.
+        Several core ideas animate most contemporary practice: that significant mental and emotional processes operate outside conscious awareness; that people frequently hold contradictory feelings and desires simultaneously; that early relational experience shapes the way we interpret present circumstances; and that the patterns most relevant to a person's suffering will eventually manifest within the therapeutic relationship itself.
+
+        In practice, this means attention to affect and the expression of emotion, to recurring themes and patterns across a person's life, to the developmental roots of present difficulties, and to what unfolds between patient and therapist in the room. The goal, as the tradition has long held, is to loosen the bonds of past experience — and in doing so, to expand freedom and choice.
     - question: How well-supported is psychodynamic therapy by empirical research — and why is there a perception that it isn't?
       answer: |
-        Answer forthcoming.
+        The gap between psychodynamic therapy's actual evidence base and its reputation within academic psychology is itself a subject of scholarly concern.
+
+        The evidence base for psychodynamic therapy is substantial and spans decades of research across randomized controlled trials, meta-analyses, and long-term outcome studies. [Shedler's 2010 meta-analysis](https://doi.org/10.1037/a0018378) in American Psychologist and a [2023 umbrella review by Leichsenring et al.](https://doi.org/10.1002/wps.21104) in World Psychiatry represent two landmark contributions to a literature that continues to grow — both confirming psychodynamic therapy's standing as a fully empirically supported treatment across a wide range of clinical presentations.
+
+        That this evidence remains poorly known in many training programs reflects patterns in how research is disseminated and funded — not the state of the research itself.
+
+        *A dedicated a²p² research library is currently in development — we encourage readers to consult the literature directly.*
     - question: How does psychodynamic therapy differ from Cognitive Behavioral Therapy (CBT)?
       answer: |
-        Answer forthcoming.
+        The distinction lies primarily in the theory of change. Cognitive-behavioral therapy focuses on modifying thoughts and behaviors. Psychodynamic therapy focuses on what those thoughts and behaviors express — the relational history and internal conflicts that give rise to them. Both approaches are evidence-based and serve important clinical functions.
+
+        Research on therapy outcomes has also found that the most effective CBT practitioners tend to attend closely to patients' emotional responses within the session and draw connections to other significant relationships — which is, in effect, working with transference. Psychodynamic thinking has similarly found common ground with motivational interviewing, attachment-based approaches, and other relational traditions. In practice, skilled clinicians across traditions often arrive at the same place — attending to relationship, meaning, and emotional experience — regardless of their theoretical starting point.
     - question: Is psychodynamic therapy only for certain kinds of people?
       answer: |
-        Answer forthcoming.
+        One of the most persistent misconceptions is that psychodynamic work is reserved for the wealthy, the highly verbal, or those seeking years of intensive treatment. The evidence does not support this. Psychodynamic approaches have been applied across a wide range of presentations, populations, and clinical contexts, including time-limited formats designed for accessibility. a²p² holds that one of the field's most important tasks is ensuring that psychodynamic thinking reaches the communities and populations it has historically failed to center — and that training reflects a genuine commitment to equity and accessibility.
     - question: Is a²p² focused exclusively on psychodynamic psychology?
       answer: |
-        Answer forthcoming.
+        Despite our name, a²p² recognizes and engages with the broader tradition of depth-oriented psychology and related approaches that place meaning, subjectivity, and the complexity of inner life at the center of clinical work and human understanding.
+
+        This broader conversation includes existential psychology — May, Frankl, Yalom — with its focus on meaning, mortality, freedom, and the fundamental questions of human existence; Adlerian psychology and its attention to social belonging, inferiority, purpose, and human striving; humanistic psychology — Rogers, Maslow — and its commitment to human potential, self-actualization, and the conditions that support genuine growth; and analytical psychology — Jung — with its particular attention to the unconscious, archetypes, individuation, and the symbolic dimensions of inner life.
+
+        a²p² also recognizes the many other orientations not named here — among them Gestalt therapy, Internal Family Systems, somatic and body-oriented approaches, and emerging psychedelic-assisted therapies — that share a scholarly and clinical commitment to insight, subjectivity, and a holistic understanding of consciousness and psychological functioning.
     - question: Doesn't psychodynamic work have a troubling history — on gender, race, and sexuality?
       answer: |
-        Answer forthcoming.
+        It does, and that history demands honest acknowledgment. Early psychoanalytic theories pathologized women and homosexuality; the field largely excluded, ignored, and failed the experiences of people of color. These are not peripheral failures — they shaped who the field was built for and who it was not. Contemporary psychodynamic practice takes these critiques seriously — and the tradition's own emphasis on unflinching self-examination provides the very tools needed to reckon with them. a²p² holds that a psychodynamic psychology worth preserving is one capable of sitting with its own blind spots and growing from them.
     - question: Why does it matter whether psychodynamic thinking survives in academic training?
       answer: |
-        Answer forthcoming.
+        Because the frameworks clinicians are trained in determine what they are able to see. A practitioner who has never encountered psychodynamic thought is not simply missing a technique — they are missing a way of understanding people. The retreat of psychodynamic ideas from academic psychology has been shaped less by clinical evidence than by institutional forces: research funding structures, insurance incentives, and the institutional preference for approaches that are brief, manualized, and easily measured. Understanding this landscape — and its costs — matters for the future of the field.
   close: |
     a²p² is an active scholarly community. If you are a researcher, clinician, or trainee interested in contributing to the advancement of psychodynamic psychology, we welcome you to [get in touch](/get-involved).
 

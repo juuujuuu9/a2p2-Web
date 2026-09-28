@@ -1,26 +1,18 @@
 @import "tailwindcss";
-@source inline("font-sauce-regular font-sauce-bold font-inter-regular font-inter-bold");
+@source inline("font-inter-regular font-inter-bold");
 
 @font-face {
-  font-family: "Open Sauce One";
-  src: url("/fonts/OpenSauceOne-Regular.ttf") format("truetype");
+  font-family: "Inter";
+  src: url("/fonts/Inter-Regular.woff2") format("woff2");
   font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Open Sauce One";
-  src: url("/fonts/OpenSauceOne-Bold.ttf") format("truetype");
-  font-weight: 500 700;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
   font-family: "Inter";
-  src: url("/fonts/Inter-Regular.woff2") format("woff2");
-  font-weight: 400;
+  src: url("/fonts/Inter-Medium.woff2") format("woff2");
+  font-weight: 500;
   font-style: normal;
   font-display: swap;
 }
@@ -41,35 +33,9 @@
   font-display: swap;
 }
 
-@font-face {
-  font-family: "Public Sans";
-  src: url("/fonts/PublicSans-Regular.woff2") format("woff2");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Public Sans";
-  src: url("/fonts/PublicSans-Italic.woff2") format("woff2");
-  font-weight: 400;
-  font-style: italic;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Public Sans";
-  src: url("/fonts/PublicSans-Bold.woff2") format("woff2");
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-}
-
 @theme {
-  --font-sauce: "Open Sauce One", system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   --font-inter: "Inter", system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  --font-public: "Public Sans", system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  --font-sans: "Open Sauce One", system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-sans: "Inter", system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   --color-bg: #20263e;
   --color-fg: #ffffff;
   --color-muted: rgba(255, 255, 255, 0.78);
@@ -77,16 +43,6 @@
   --color-surface: #20263e;
   --color-accent: #ffffff;
   --color-accent-fg: #20263e;
-}
-
-@utility font-sauce-regular {
-  font-family: var(--font-sauce);
-  font-weight: 400;
-}
-
-@utility font-sauce-bold {
-  font-family: var(--font-sauce);
-  font-weight: 700;
 }
 
 @utility font-inter-regular {
@@ -102,7 +58,7 @@
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 4.5rem;
-  font-family: var(--font-sauce);
+  font-family: var(--font-inter);
   font-weight: 400;
 }
 
@@ -127,16 +83,11 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: var(--font-sauce);
-  font-weight: 700;
+  font-family: var(--font-inter);
+  font-weight: 500;
   font-size: 24pt;
   letter-spacing: -0.025em;
   line-height: 1.25;
-}
-
-.faq-page,
-.faq-page :is(h1, h2, h3, h4, h5, h6, button) {
-  font-family: var(--font-public);
 }
 
 .prose-site {

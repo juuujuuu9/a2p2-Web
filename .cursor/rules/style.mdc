@@ -25,9 +25,9 @@ Stacked full-bleed bands, no cards, no hero overlay, no rounded photo:
 
 ## Type and color
 
-- Open Sauce One: wordmark, nav, buttons, UI.
-- Inter: mission and long reading copy, 18pt.
-- Public Sans: FAQ page only. Header and footer stay Open Sauce One.
+- Inter is the default: nav, buttons, UI, and body copy. Body stays regular at 18pt.
+- Section titles (Who We Are, Our Mission, page headings) are Inter Medium (500) — bold, thinner than Inter Bold.
+- Principle numbers stay Inter Bold at 33.2px in `#7199ab`.
 - Tokens in `src/index.css`: `--color-bg` navy, `--color-fg` white. Do not reintroduce light `--color-surface` pages.
 - Hairlines are `white/20`. Principle numbers use `#7199ab`; do not add other accent blues.
 

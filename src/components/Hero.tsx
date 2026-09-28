@@ -50,7 +50,7 @@ export function Hero({
         <div className="mx-auto max-w-7xl px-6 py-14 sm:px-8 sm:py-16 lg:px-12 lg:py-20">
           <div data-flow="lede" className={flowClass(flowOn('lede'))}>
             {ledeTitle ? (
-              <h2 className="font-sauce-regular mb-5 text-2xl tracking-tight text-fg sm:text-3xl">
+              <h2 className="mb-5 text-2xl tracking-tight text-fg sm:text-3xl">
                 {ledeTitle}
               </h2>
             ) : null}

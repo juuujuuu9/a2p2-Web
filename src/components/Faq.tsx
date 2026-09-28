@@ -12,7 +12,7 @@ export function Faq({ hero, heading, items, close }: FaqContent) {
   const revealed = useStaggerReveal(listRef, items.length, 'data-faq')
 
   return (
-    <div ref={pageRef} className="faq-page">
+    <div ref={pageRef}>
       <div data-flow="hero" className={`relative ${flowClass(flowOn('hero'))}`}>
         <img
           src={FAQ_HERO.src}
@@ -24,8 +24,8 @@ export function Faq({ hero, heading, items, close }: FaqContent) {
           decoding="sync"
         />
         {hero ? (
-          <div className="absolute inset-0 flex items-center justify-center bg-bg/20 px-6">
-            <p className="text-center text-xl leading-snug whitespace-pre-line text-white sm:text-2xl">
+          <div className="pointer-events-none absolute inset-0 flex items-center justify-center px-5 sm:px-8">
+            <p className="font-inter-bold text-center leading-[1.15] tracking-[-0.02em] whitespace-pre-line text-white [font-size:clamp(1.2rem,5.15vw,2.75rem)] [text-shadow:0_1px_2px_rgba(32,38,62,0.45)]">
               {hero}
             </p>
           </div>

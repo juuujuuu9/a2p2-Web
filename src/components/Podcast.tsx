@@ -109,7 +109,7 @@ function GuestBioPanel({
             {guest.name}
           </h2>
           {guest.role ? (
-            <p className="mt-1 text-center font-sauce-bold text-base text-fg">
+            <p className="mt-1 text-center font-inter-bold text-base text-fg">
               {guest.role}
             </p>
           ) : null}
@@ -186,7 +186,7 @@ export function Podcast({
             decoding="sync"
           />
           {welcome ? (
-            <p className="mx-auto mt-8 max-w-md text-center font-sauce-regular text-[15px] leading-relaxed text-fg/85 italic sm:mt-10 sm:max-w-lg sm:text-[17px]">
+            <p className="mx-auto mt-8 max-w-md text-center text-[15px] leading-relaxed text-fg/85 italic sm:mt-10 sm:max-w-lg sm:text-[17px]">
               {welcome}
             </p>
           ) : null}
@@ -194,7 +194,7 @@ export function Podcast({
         <div className="mx-auto mt-10 max-w-7xl px-6 sm:mt-12 sm:px-8 lg:px-12">
           <h1
             data-flow="about"
-            className={`font-sauce-bold pb-4 text-xl tracking-tight text-fg sm:text-2xl ${flowClass(flowOn('about'))}`}
+            className={`pb-4 text-xl tracking-tight text-fg sm:text-2xl ${flowClass(flowOn('about'))}`}
           >
             {title}
           </h1>
@@ -241,7 +241,7 @@ export function Podcast({
         <div className="mx-auto max-w-7xl px-6 pt-16 sm:px-8 lg:px-12">
           <h2
             data-flow="episodes-heading"
-            className={`font-sauce-bold pb-4 text-xl tracking-tight sm:text-2xl ${flowClass(flowOn('episodes-heading'))}`}
+            className={`pb-4 text-xl tracking-tight sm:text-2xl ${flowClass(flowOn('episodes-heading'))}`}
           >
             Episodes
           </h2>
@@ -261,7 +261,7 @@ export function Podcast({
                 aria-hidden
                 className="absolute bottom-0 left-1/2 h-px w-screen -translate-x-1/2 bg-bg/20"
               />
-              <span className="font-sauce-bold shrink-0 whitespace-nowrap text-[18pt] leading-none tracking-tighter text-[#7199ab] sm:text-[24pt]">
+              <span className="font-inter-bold shrink-0 whitespace-nowrap text-[18pt] leading-none tracking-tighter text-[#7199ab] sm:text-[24pt]">
                 {episode.code}
               </span>
               {episode.href ? (
@@ -287,7 +287,7 @@ export function Podcast({
           <h2
             id="season-1"
             data-flow="season-heading"
-            className={`font-sauce-bold text-center text-2xl tracking-tight sm:text-3xl ${flowClass(flowOn('season-heading'))}`}
+            className={`text-center text-2xl tracking-tight sm:text-3xl ${flowClass(flowOn('season-heading'))}`}
           >
             {seasonOne.title}
           </h2>
@@ -308,11 +308,11 @@ export function Podcast({
                   onClick={() => setActiveGuest(guest)}
                 >
                   <GuestPortrait guest={guest} />
-                  <p className="mt-2.5 font-sauce-bold text-[13px] leading-snug sm:text-base">
+                  <p className="mt-2.5 font-inter-bold text-[13px] leading-snug sm:text-base">
                     {guest.name}
                   </p>
                   {guest.role ? (
-                    <p className="font-sauce-bold text-[13px] leading-snug sm:text-base">
+                    <p className="font-inter-bold text-[13px] leading-snug sm:text-base">
                       {guest.role}
                     </p>
                   ) : null}
@@ -334,7 +334,7 @@ export function Podcast({
             {gratitude.cta.label && gratitude.cta.href ? (
               <a
                 href={gratitude.cta.href}
-                className="mt-10 inline-block border border-fg px-3.5 py-1.5 font-sauce-regular text-[17px] text-fg hover:opacity-90"
+                className="mt-10 inline-block border border-fg px-3.5 py-1.5 text-[17px] text-fg hover:opacity-90"
                 {...newTabProps(gratitude.cta.href)}
               >
                 {gratitude.cta.label}

@@ -73,7 +73,7 @@ export function Header({ siteTitle, tagline, nav, social, donate }: HeaderProps)
                 decoding="async"
               />
               {tagline ? (
-                <span className="font-sauce-regular hidden max-w-[18rem] leading-snug whitespace-pre-line text-fg sm:block">
+                <span className="hidden max-w-[18rem] leading-snug whitespace-pre-line text-fg sm:block">
                   {tagline}
                 </span>
               ) : null}

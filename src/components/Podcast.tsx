@@ -176,14 +176,11 @@ export function Podcast({
           data-flow="intro"
           className={`mx-auto max-w-7xl px-6 pt-14 sm:px-8 sm:pt-18 lg:px-12 lg:pt-20 ${flowClass(flowOn('intro'))}`}
         >
-          <img
-            src={PODCAST_MARK.src}
-            width={PODCAST_MARK.width}
-            height={PODCAST_MARK.height}
-            alt="Academics for the Advancement of Psychodynamic Psychology"
-            className="mx-auto h-auto w-full max-w-[350px]"
-            fetchPriority="high"
-            decoding="sync"
+          <div
+            role="img"
+            aria-label="Academics for the Advancement of Psychodynamic Psychology"
+            className="mx-auto aspect-square w-full max-w-[350px] overflow-hidden rounded-3xl bg-cover bg-center bg-no-repeat"
+            style={{ backgroundImage: `url('${PODCAST_MARK.src}')` }}
           />
           {welcome ? (
             <p className="mx-auto mt-8 max-w-md text-center text-[15px] leading-relaxed text-fg/85 italic sm:mt-10 sm:max-w-lg sm:text-[17px]">
